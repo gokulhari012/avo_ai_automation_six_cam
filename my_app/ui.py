@@ -7,7 +7,7 @@ import numpy as np
 import glob
 
 def main_window():
-    # Create the main root window
+    # Create the main root windows
     root = tk.Tk()
     # root.geometry("700x820")
     root.geometry("700x820")
