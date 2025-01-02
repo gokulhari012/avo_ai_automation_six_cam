@@ -88,7 +88,7 @@ def open_select_brush():
 
 def open_train():
     # Open a new window for Train
-    subprocess.Popen(["python", "train.py"])
+    subprocess.Popen(["python", "training.py"])
     
 
 def open_daily_operations():
@@ -111,7 +111,7 @@ def select_brush_window():
     bg_label.place(relwidth=1, relheight=1)
 
     # List all dataset folders and create buttons with custom font and image
-    dataset_folders = [folder for folder in os.listdir('.') if os.path.isdir(folder) and folder.startswith('dataset_')]
+    dataset_folders = [folder for folder in os.listdir('datasets') if os.path.isdir(folder) and folder.startswith('dataset_')]
     font_path = "assets/Loubag-Bold.ttf"
     font_size = 70
     font = ImageFont.truetype(font_path, font_size)
