@@ -3,49 +3,31 @@ import numpy as np
 import pygame
 import serial
 import time
+import time
+import threading
 
-# Read the folder name from brush.txt
-with open("brush.txt", "r") as file:
-    folder_name = file.read().strip()
+is_rashberrypi = False
+# is_rashberrypi = True
 
-# Read captured areas from the corresponding text file
-areas_file = f"{folder_name}/{folder_name}.txt"
-with open(areas_file, "r") as file:
-    areas = [float(value) for line in file.readlines() for value in line.strip()[1:-1].split(',') if value.strip()]
-    max_area = max(areas)
-    min_area = min(areas)
+thread_list = []
+camera_index_list = [0, 1]
 
-# Set up serial communication with Arduino
-ser = serial.Serial('COM7', 9600)  # Replace 'COM7' with your actual port
-time.sleep(0.5)  # Reduced delay for Arduino initialization
+if is_rashberrypi:
+    # Set up serial communication with Arduino
+    ser = serial.Serial('COM7', 9600)  # Replace 'COM7' with your actual port
+    time.sleep(0.5)  # Reduced delay for Arduino initialization
 
-# Set servo to home position initially
-ser.write(b'H')
-print("Servo set to home position.")
-
-# Open webcam feed (default webcam index 1)
-cap = cv2.VideoCapture(1)
-
-# Initialize Pygame
-pygame.init()
-
-# Set up display
-window_width, window_height = 640, 480  # Assuming a standard webcam resolution
-window = pygame.display.set_mode((window_width, window_height))
-pygame.display.set_caption("Threshold Adjuster")
-
-# Colors
-WHITE = (255, 255, 255)
-RED = (255, 0, 0)
-GREEN = (0, 255, 0)
-BLACK = (0, 0, 0)
+    # Set servo to home position initially
+    ser.write(b'H')
+    print("Servo set to home position.")
 
 # Button dimensions
 button_width, button_height = 50, 30
 
-# Initial threshold values based on captured areas
-threshold_min = min_area
-threshold_max = max_area
+WHITE = (255, 255, 255)
+RED = (255, 0, 0)
+GREEN = (0, 255, 0)
+BLACK = (0, 0, 0)
 
 # Variables to manage servo timing and state tracking
 servo_status = "home"  # Track current status: "home", "accepted", or "rejected"
@@ -84,7 +66,7 @@ def relay_servo_command(status):
         servo_status = status  # Update the servo status
 
 # Function to apply threshold and convert image to Pygame surface
-def apply_threshold(gray):
+def apply_threshold(gray, threshold_min, threshold_max, min_area):
     global last_state, buffer_state, last_detection_time, state_confirmed
     _, threshold = cv2.threshold(gray, threshold_min, threshold_max, cv2.THRESH_BINARY)
     threshold_rgb = cv2.cvtColor(threshold, cv2.COLOR_GRAY2RGB)
@@ -121,7 +103,8 @@ def apply_threshold(gray):
         elif current_state == buffer_state and not state_confirmed:
             last_state = buffer_state
             last_detection_time = time.time()  # Update detection time
-            relay_servo_command(last_state)  # Relay stable state
+            if is_rashberrypi:
+                relay_servo_command(last_state)  # Relay stable state
             state_confirmed = True  # Mark state as confirmed
     else:
         # If no brush is detected and reset time has passed, reset to "home"
@@ -129,61 +112,109 @@ def apply_threshold(gray):
             last_state = "home"
             buffer_state = "home"
             state_confirmed = False
-            relay_servo_command("home")
+            if is_rashberrypi:
+                relay_servo_command("home")
             print("No brush detected. Servo staying at home position.")
 
     surface = pygame.surfarray.make_surface(threshold_rgb.transpose((1, 0, 2)))
     return surface
 
-# Main loop
-running = True
-while running:
-    # Capture frame from webcam
-    ret, frame = cap.read()
-    if not ret:
-        print("Failed to capture image from webcam.")
-        break
 
-    # Convert the image to grayscale
-    framea = frame[:, 300:700]
-    frame2 = cv2.bitwise_not(framea)
-    gray = cv2.cvtColor(frame2, cv2.COLOR_BGR2GRAY)
+def main_program(camera_id, cap):
+    global window
+     # Read the folder name from brush.txt
+    with open("brush.txt", "r") as file:
+        folder_name = "datasets/"+file.read().strip()+"/"+str(camera_id)
 
-    # Handle events
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            running = False
-        elif event.type == pygame.MOUSEBUTTONDOWN:
-            mouse_x, mouse_y = event.pos
+    # Read captured areas from the corresponding text file
+    areas_file = f"{folder_name}/{camera_id}.txt"
+    with open(areas_file, "r") as file:
+        areas = [float(value) for line in file.readlines() for value in line.strip()[1:-1].split(',') if value.strip()]
+        max_area = max(areas)
+        min_area = min(areas)
 
-            # Decrease min threshold button
-            if 10 <= mouse_x <= 10 + button_width and 10 <= mouse_y <= 10 + button_height:
-                threshold_min = max(0, threshold_min - 5)
-                print(f"Updated threshold_min: {threshold_min}")
+    # Initialize Pygame
+    pygame.init()
 
-            # Increase min threshold button
-            elif 70 <= mouse_x <= 70 + button_width and 10 <= mouse_y <= 10 + button_height:
-                threshold_min = min(255, threshold_min + 5)
-                print(f"Updated threshold_min: {threshold_min}")
+    # Set up display
+    window_width, window_height = 640, 480  # Assuming a standard webcam resolution
+    window = pygame.display.set_mode((window_width, window_height))
+    pygame.display.set_caption("Threshold Adjuster_"+str(camera_id))
+ 
 
-            # Decrease max threshold button
-            elif 150 <= mouse_x <= 150 + button_width and 10 <= mouse_y <= 10 + button_height:
-                threshold_max = max(0, threshold_max - 5)
-                print(f"Updated threshold_max: {threshold_max}")
+    # Initial threshold values based on captured areas
+    threshold_min = min_area
+    threshold_max = max_area
 
-            # Increase max threshold button
-            elif 210 <= mouse_x <= 210 + button_width and 10 <= mouse_y <= 10 + button_height:
-                threshold_max = min(255, threshold_max + 5)
-                print(f"Updated threshold_max: {threshold_max}")
+    # Main loop
+    running = True
+    while running:
+        # Capture frame from webcam
+        ret, frame = cap.read()
+        if not ret:
+            print("Failed to capture image from webcam.")
+            break
 
-    # Update the display
-    window.fill(WHITE)
-    draw_buttons()
-    threshold_surface = apply_threshold(gray)
-    window.blit(threshold_surface, (0, 50))
-    pygame.display.flip()
+        # Convert the image to grayscale
+        framea = frame[:, 300:700]
+        frame2 = cv2.bitwise_not(framea)
+        gray = cv2.cvtColor(frame2, cv2.COLOR_BGR2GRAY)
 
-# Release resources and quit
-cap.release()
-pygame.quit()
-ser.close()
+        # Handle events
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                running = False
+            elif event.type == pygame.MOUSEBUTTONDOWN:
+                mouse_x, mouse_y = event.pos
+
+                # Decrease min threshold button
+                if 10 <= mouse_x <= 10 + button_width and 10 <= mouse_y <= 10 + button_height:
+                    threshold_min = max(0, threshold_min - 5)
+                    print(f"Updated threshold_min: {threshold_min}")
+
+                # Increase min threshold button
+                elif 70 <= mouse_x <= 70 + button_width and 10 <= mouse_y <= 10 + button_height:
+                    threshold_min = min(255, threshold_min + 5)
+                    print(f"Updated threshold_min: {threshold_min}")
+
+                # Decrease max threshold button
+                elif 150 <= mouse_x <= 150 + button_width and 10 <= mouse_y <= 10 + button_height:
+                    threshold_max = max(0, threshold_max - 5)
+                    print(f"Updated threshold_max: {threshold_max}")
+
+                # Increase max threshold button
+                elif 210 <= mouse_x <= 210 + button_width and 10 <= mouse_y <= 10 + button_height:
+                    threshold_max = min(255, threshold_max + 5)
+                    print(f"Updated threshold_max: {threshold_max}")
+
+        # Update the display
+        window.fill(WHITE)
+        draw_buttons()
+        threshold_surface = apply_threshold(gray, threshold_min, threshold_max, min_area)
+        window.blit(threshold_surface, (0, 50))
+        pygame.display.flip()
+
+    # Release resources and quit
+    cap.release()
+    pygame.quit()
+    if is_rashberrypi:
+        ser.close()
+
+# Start threads for each camera
+for camera_id in camera_index_list:
+    try:
+        camera = cv2.VideoCapture(camera_id, cv2.CAP_DSHOW)
+        if not camera.isOpened():
+            print(f"Error: Could not open camera {camera_id}.")
+            continue
+        t = threading.Thread(target=main_program, args=(camera_id, camera,))
+        thread_list.append(t)
+        t.start()
+    except Exception as e:
+        print(f"Error initializing camera {camera_id}: {e}")
+
+# Wait for threads to complete
+for t in thread_list:
+    t.join()
+
+print("All camera daily operations are closed")
