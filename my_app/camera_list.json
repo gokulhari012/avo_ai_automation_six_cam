@@ -1,5 +1,6 @@
 {
     "camera_index_list": [5,2,1,0,3,4],
     "time_delay": 1000,
-    "arduino_com_port": "COM7" 
+    "arduino_com_port": "COM7", 
+    "is_ouput_required": false
 }

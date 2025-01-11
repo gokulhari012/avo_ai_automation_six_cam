@@ -27,6 +27,7 @@ running = True
 camera_index_list = json_data["camera_index_list"]
 time_delay = json_data["time_delay"] #time delay to take pictures
 arduino_com_port = json_data["arduino_com_port"] #time delay to take pictures
+is_ouput_required = json_data["is_ouput_required"] #arduino connection status.
 
 camera_0 = [0,0,0,0,0,0]
 camera_1 = [0,0,0,0,0,0]
