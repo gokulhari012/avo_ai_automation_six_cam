@@ -73,7 +73,7 @@ def save_brush_selection(folder):
     # Save the selected folder name to brush.txt
     with open("brush.txt", "w") as file:
         file.write(folder)
-
+    print("DataSet "+str(folder)+" is selected")
 
 def on_close(window):
     # Close the window

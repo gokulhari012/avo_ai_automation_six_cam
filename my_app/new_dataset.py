@@ -3,13 +3,24 @@ import os
 import time
 import shutil
 import threading
+import json
 
 # Constants
 width, video_height = 800, 600  # Window size
 button_height = 100  # Space allocated for buttons
 record_folder = None  # Global variable for the dataset folder
-camera_index_list = [0, 1]  # List of camera indices
+
+camera_index_list = [0,1,2,3,4,5]  # List of camera indices
+
+with open("camera_list.json", "r") as file:
+    json_data = json.load(file)
+
+camera_index_list = json_data["camera_index_list"]
+time_delay = json_data["time_delay"] #time delay to take pictures
+
 thread_list = []
+start_capturing = False
+run = True
 
 # Function to get the next dataset folder name
 def get_next_dataset_folder():
@@ -35,6 +46,7 @@ def create_dataset(camera_id):
 
 # Save a snapshot
 def save_snapshot(camera_id, frame):
+    create_dataset(camera_id)
     global record_folder
     camera_id = str(camera_id)
     if record_folder and os.path.isdir(record_folder + "/" + camera_id):
@@ -58,10 +70,15 @@ def merge_datasets():
 
 # Main function for each camera
 def main_program(camera_id, camera):
-    print(f"Starting camera {camera_id}")
-    window_name = f"Camera {camera_id}"+" - C-create,S-snap,M-merge,Q-quit"
+    global start_capturing, run
 
-    while True:
+    previous_time = time.time() * 1000
+    current_time = previous_time
+
+    print(f"Starting camera {camera_id}")
+    window_name = f"Camera id: {camera_id} index: {camera_index_list.index(camera_id)}"+" - S-Start, Q-quit"
+
+    while run:
         ret, frame = camera.read()
         if not ret:
             print(f"Failed to grab frame for Camera {camera_id}.")
@@ -74,13 +91,23 @@ def main_program(camera_id, camera):
         key = cv2.waitKey(1) & 0xFF
         if key == ord('q'):  # Quit the stream
             print(f"Closing Camera {camera_id}.")
+            run = False
+            start_capturing = False
             break
         elif key == ord('c'):  # Create dataset
             create_dataset(camera_id)
         elif key == ord('s'):  # Save snapshot
-            save_snapshot(camera_id, frame)
+            print("Capturing Started")
+            start_capturing = True
+            # save_snapshot(camera_id, frame)
         elif key == ord('m'):  # Merge datasets
             merge_datasets()
+
+        if start_capturing:
+            current_time = time.time() * 1000
+            if(previous_time + time_delay < current_time):
+                previous_time = current_time
+                save_snapshot(camera_id, frame)
 
     # Cleanup
     camera.release()

@@ -2,8 +2,14 @@ import cv2
 import numpy as np
 import pygame
 import os
+import time
+import json
 
-camera_index_list = [0, 1]  # List of camera indices
+camera_index_list = [0,1,2,3,4,5]  # List of camera indices
+with open("camera_list.json", "r") as file:
+    json_data = json.load(file)
+
+camera_index_list = json_data["camera_index_list"]
 
 folder_path = ""
 
@@ -23,6 +29,8 @@ hue_min, hue_max = 0, 180
 sat_min, sat_max = 0, 255
 val_min, val_max = 0, 255
 
+start_training = False
+running = True
 
 # Function to draw buttons
 def draw_buttons():
@@ -119,7 +127,7 @@ def load_image():
     framea = frame[:, 0:500]
     hsv_image = cv2.cvtColor(framea, cv2.COLOR_BGR2HSV)
 
-def start_training(camera_id):
+def start_training_method(camera_id):
     global image_files, image_index, window, output_file, folder_path
     # Folder containing images
     # folder_path = "dataset_7"
@@ -135,21 +143,30 @@ def start_training(camera_id):
     # Set up display
     window_width, window_height = framea.shape[1], framea.shape[0] + 180
     window = pygame.display.set_mode((window_width, window_height))
-    pygame.display.set_caption("HSV Threshold Adjuster_"+str(camera_id))
+    pygame.display.set_caption("HSV Threshold Adjuster Id: "+str(camera_id)+f" Index: {camera_index_list.index(camera_id)}"+" Press S - Start Tranning and Q - Exit")
     # File to store the areas
     output_file = os.path.join(folder_path, f"{os.path.basename(folder_path)}.txt")
+
     main_loop()
+    image_index = 0
+    print("Traning started")
+    for i in range(len(image_files)): 
+        print("Image index: "+str(i))
+        main_loop()
+        if not running:
+            break
+        time.sleep(0.3)
+        next_image()
+        # Quit Pygame
+    pygame.quit()
 
 def main_loop():
-    global val_max, val_min, sat_max, sat_min, hue_max, hue_min
+    global val_max, val_min, sat_max, sat_min, hue_max, hue_min, start_training, running
+    start_training_triggered = False
+
     # Main loop
-    running = True
     while running:
-        # Check for key inputs
-        key = cv2.waitKey(1) & 0xFF
-        if key == ord('q'):  # Quit the stream
-            print("Closing")
-            running = False
+ 
         # Handle events
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -160,28 +177,40 @@ def main_loop():
                 # Adjust thresholds based on button clicked
                 if 10 <= mouse_x <= 10 + button_width and 30 <= mouse_y <= 30 + button_height:
                     hue_min = max(0, hue_min - 5)
+                    print(f"Updated hue_min: {hue_min}")
                 elif 70 <= mouse_x <= 70 + button_width and 30 <= mouse_y <= 30 + button_height:
                     hue_min = min(180, hue_min + 5)
+                    print(f"Updated hue_min: {hue_min}")
                 elif 150 <= mouse_x <= 150 + button_width and 30 <= mouse_y <= 30 + button_height:
                     hue_max = max(0, hue_max - 5)
+                    print(f"Updated hue_max: {hue_max}")
                 elif 210 <= mouse_x <= 210 + button_width and 30 <= mouse_y <= 30 + button_height:
                     hue_max = min(180, hue_max + 5)
+                    print(f"Updated hue_max: {hue_max}")
                 elif 10 <= mouse_x <= 10 + button_width and 90 <= mouse_y <= 90 + button_height:
                     sat_min = max(0, sat_min - 5)
+                    print(f"Updated sat_min: {sat_min}")
                 elif 70 <= mouse_x <= 70 + button_width and 90 <= mouse_y <= 90 + button_height:
                     sat_min = min(255, sat_min + 5)
+                    print(f"Updated sat_min: {sat_min}")
                 elif 150 <= mouse_x <= 150 + button_width and 90 <= mouse_y <= 90 + button_height:
                     sat_max = max(0, sat_max - 5)
+                    print(f"Updated sat_max: {sat_max}")
                 elif 210 <= mouse_x <= 210 + button_width and 90 <= mouse_y <= 90 + button_height:
                     sat_max = min(255, sat_max + 5)
+                    print(f"Updated sat_max: {sat_max}")
                 elif 10 <= mouse_x <= 10 + button_width and 150 <= mouse_y <= 150 + button_height:
                     val_min = max(0, val_min - 5)
+                    print(f"Updated val_min: {val_min}")
                 elif 70 <= mouse_x <= 70 + button_width and 150 <= mouse_y <= 150 + button_height:
                     val_min = min(255, val_min + 5)
+                    print(f"Updated val_min: {val_min}")
                 elif 150 <= mouse_x <= 150 + button_width and 150 <= mouse_y <= 150 + button_height:
                     val_max = max(0, val_max - 5)
+                    print(f"Updated val_max: {val_max}")
                 elif 210 <= mouse_x <= 210 + button_width and 150 <= mouse_y <= 150 + button_height:
                     val_max = min(255, val_max + 5)
+                    print(f"Updated val_max: {val_max}")
 
                 # Capture area button
                 elif 300 <= mouse_x <= 300 + 150 and 50 <= mouse_y <= 50 + 40:
@@ -191,6 +220,14 @@ def main_loop():
                 # Next image button
                 elif 300 <= mouse_x <= 300 + 150 and 100 <= mouse_y <= 100 + 40:
                     next_image()
+            elif event.type == pygame.KEYDOWN:
+                # Handle keyboard input
+                if event.key == pygame.K_q:  # Quit the stream
+                    print("Closing")
+                    running = False
+                elif event.key == pygame.K_s:  # Start training
+                    print("Training triggred")
+                    start_training_triggered = True
 
         # Update the display
         window.fill(WHITE)
@@ -199,15 +236,24 @@ def main_loop():
         window.blit(threshold_surface, (0, 190))  # Adjusted height for buttons
         pygame.display.flip()
 
-    # Quit Pygame
-    pygame.quit()
+        if start_training_triggered:
+            start_training = True
+            break
+        if start_training:
+            _, areas = apply_threshold()
+            save_areas(areas)
+            break
 
+        
 # Start threads for each camera
 for camera_id in camera_index_list:
     try:
         with open("brush.txt", "r") as file:
             folder_path = "datasets/"+file.read().strip()
         print(camera_id)    
-        start_training(camera_id)
+        start_training_method(camera_id)
     except Exception as e:
         print(f"Error in tranining camera {camera_id} datas: {e}")
+
+print ("Tranning successfully Completed")
+
