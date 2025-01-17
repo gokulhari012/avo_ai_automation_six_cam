@@ -62,18 +62,19 @@ def select_brush_window():
         y_position = 20 + row * (button_height + 20)
 
         # Create button
-        button = tk.Button(window, image=button_photo, borderwidth=0, command=lambda folder=folder: save_brush_selection(folder))
+        button = tk.Button(window, image=button_photo, borderwidth=0, command=lambda folder=folder: save_brush_selection(folder, window))
         button.image = button_photo
         button.place(x=x_position, y=y_position)
 
     window.protocol("WM_DELETE_WINDOW", lambda: on_close(window))
     window.mainloop()
 
-def save_brush_selection(folder):
+def save_brush_selection(folder, window):
     # Save the selected folder name to brush.txt
     with open("brush.txt", "w") as file:
         file.write(folder)
     print("DataSet "+str(folder)+" is selected")
+    on_close(window)
 
 def on_close(window):
     # Close the window

@@ -12,7 +12,7 @@ record_folder = None  # Global variable for the dataset folder
 
 camera_index_list = [0,1,2,3,4,5]  # List of camera indices
 
-with open("camera_list.json", "r") as file:
+with open("configuration.json", "r") as file:
     json_data = json.load(file)
 
 camera_index_list = json_data["camera_index_list"]

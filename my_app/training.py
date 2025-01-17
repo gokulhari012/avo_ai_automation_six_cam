@@ -6,13 +6,13 @@ import time
 import json
 
 camera_index_list = [0,1,2,3,4,5]  # List of camera indices
-with open("camera_list.json", "r") as file:
+with open("configuration.json", "r") as file:
     json_data = json.load(file)
 
 camera_index_list = json_data["camera_index_list"]
 
 folder_path = ""
-
+settings_file_path = "./settings.json"
 
 # Colors
 WHITE = (255, 255, 255)
@@ -31,6 +31,39 @@ val_min, val_max = 0, 255
 
 start_training = False
 running = True
+
+def save_variable(variable_name, value):
+    try:
+        # Load existing data or initialize an empty dictionary
+        try:
+            with open(settings_file_path, 'r') as file:
+                data = json.load(file)
+        except (FileNotFoundError, json.JSONDecodeError):
+            data = {}
+
+        # Update the variable in the dictionary
+        data[variable_name] = value
+
+        # Save the updated data back to the file
+        with open(settings_file_path, 'w') as file:
+            json.dump(data, file, indent=4)
+        # print(f"Variable '{variable_name}' saved successfully.")
+    except Exception as e:
+        print(f"Error saving variable '{variable_name}': {e}")
+        
+def load_variable(variable_name, default_value=0):
+    try:
+        data = {}
+        with open(settings_file_path, 'r') as file:
+            data = json.load(file)
+    except (FileNotFoundError, json.JSONDecodeError):
+        return default_value
+    except Exception as e:
+        print(f"Error loading variable '{variable_name}': {e}")
+        return default_value
+    finally:
+        return data.get(variable_name, default_value)
+
 
 # Function to draw buttons
 def draw_buttons():
@@ -128,7 +161,7 @@ def load_image():
     hsv_image = cv2.cvtColor(framea, cv2.COLOR_BGR2HSV)
 
 def start_training_method(camera_id):
-    global image_files, image_index, window, output_file, folder_path
+    global image_files, image_index, window, output_file, folder_path, start_training
     # Folder containing images
     # folder_path = "dataset_7"
     folder_path = folder_path+"/"+str(camera_id)
@@ -147,12 +180,13 @@ def start_training_method(camera_id):
     # File to store the areas
     output_file = os.path.join(folder_path, f"{os.path.basename(folder_path)}.txt")
 
-    main_loop()
+    start_training = False
+    main_loop(camera_id)
     image_index = 0
     print("Traning started")
     for i in range(len(image_files)): 
         print("Image index: "+str(i))
-        main_loop()
+        main_loop(camera_id)
         if not running:
             break
         time.sleep(0.3)
@@ -160,9 +194,15 @@ def start_training_method(camera_id):
         # Quit Pygame
     pygame.quit()
 
-def main_loop():
+def main_loop(camera_id):
     global val_max, val_min, sat_max, sat_min, hue_max, hue_min, start_training, running
+
     start_training_triggered = False
+    camera_index = camera_index_list.index(camera_id)
+
+    hue_min, hue_max = load_variable(str(camera_index)+"_hue_min",0), load_variable(str(camera_index)+"_hue_max", 180)
+    sat_min, sat_max = load_variable(str(camera_index)+"_sat_min",0), load_variable(str(camera_index)+"_sat_max", 255)
+    val_min, val_max = load_variable(str(camera_index)+"_val_min",0), load_variable(str(camera_index)+"_val_max", 255)
 
     # Main loop
     while running:
@@ -177,39 +217,51 @@ def main_loop():
                 # Adjust thresholds based on button clicked
                 if 10 <= mouse_x <= 10 + button_width and 30 <= mouse_y <= 30 + button_height:
                     hue_min = max(0, hue_min - 5)
+                    save_variable(str(camera_index)+"_hue_min",hue_min)
                     print(f"Updated hue_min: {hue_min}")
                 elif 70 <= mouse_x <= 70 + button_width and 30 <= mouse_y <= 30 + button_height:
                     hue_min = min(180, hue_min + 5)
+                    save_variable(str(camera_index)+"_hue_min",hue_min)
                     print(f"Updated hue_min: {hue_min}")
                 elif 150 <= mouse_x <= 150 + button_width and 30 <= mouse_y <= 30 + button_height:
                     hue_max = max(0, hue_max - 5)
+                    save_variable(str(camera_index)+"_hue_max",hue_max)
                     print(f"Updated hue_max: {hue_max}")
                 elif 210 <= mouse_x <= 210 + button_width and 30 <= mouse_y <= 30 + button_height:
                     hue_max = min(180, hue_max + 5)
+                    save_variable(str(camera_index)+"_hue_max",hue_max)
                     print(f"Updated hue_max: {hue_max}")
                 elif 10 <= mouse_x <= 10 + button_width and 90 <= mouse_y <= 90 + button_height:
                     sat_min = max(0, sat_min - 5)
+                    save_variable(str(camera_index)+"_sat_min",sat_min)
                     print(f"Updated sat_min: {sat_min}")
                 elif 70 <= mouse_x <= 70 + button_width and 90 <= mouse_y <= 90 + button_height:
                     sat_min = min(255, sat_min + 5)
+                    save_variable(str(camera_index)+"_sat_min",sat_min)
                     print(f"Updated sat_min: {sat_min}")
                 elif 150 <= mouse_x <= 150 + button_width and 90 <= mouse_y <= 90 + button_height:
                     sat_max = max(0, sat_max - 5)
+                    save_variable(str(camera_index)+"_sat_max",sat_max)
                     print(f"Updated sat_max: {sat_max}")
                 elif 210 <= mouse_x <= 210 + button_width and 90 <= mouse_y <= 90 + button_height:
                     sat_max = min(255, sat_max + 5)
+                    save_variable(str(camera_index)+"_sat_max",sat_max)
                     print(f"Updated sat_max: {sat_max}")
                 elif 10 <= mouse_x <= 10 + button_width and 150 <= mouse_y <= 150 + button_height:
                     val_min = max(0, val_min - 5)
+                    save_variable(str(camera_index)+"_val_min",val_min)
                     print(f"Updated val_min: {val_min}")
                 elif 70 <= mouse_x <= 70 + button_width and 150 <= mouse_y <= 150 + button_height:
                     val_min = min(255, val_min + 5)
+                    save_variable(str(camera_index)+"_val_min",val_min)
                     print(f"Updated val_min: {val_min}")
                 elif 150 <= mouse_x <= 150 + button_width and 150 <= mouse_y <= 150 + button_height:
                     val_max = max(0, val_max - 5)
+                    save_variable(str(camera_index)+"_val_max",val_max)
                     print(f"Updated val_max: {val_max}")
                 elif 210 <= mouse_x <= 210 + button_width and 150 <= mouse_y <= 150 + button_height:
                     val_max = min(255, val_max + 5)
+                    save_variable(str(camera_index)+"_val_max",val_max)
                     print(f"Updated val_max: {val_max}")
 
                 # Capture area button

@@ -97,7 +97,9 @@ def open_train():
 def open_daily_operations():
     # Open a new window for Daily Operations
     
-    subprocess.Popen(["python", "daily_operations.py"])
+    process = subprocess.Popen(["python", "daily_operations.py"])
+    print("Daily operation triggerd")
+    # process.wait()
 
 def new_window(title):
     # Create a new window with the given title
