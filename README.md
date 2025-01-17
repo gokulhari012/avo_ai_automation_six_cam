@@ -2,7 +2,7 @@
 
 ## Overview
 
-Welcome to the **Carbon Brush Automation Project**, an industrial consultancy initiative aimed at streamlining and enhancing the manufacturing and quality assurance processes of carbon brushes. This project leverages advanced image processing and machine learning techniques to automate the inspection and classification of carbon brushes, ensuring high-quality standards and reducing manual labor.
+Welcome to the **Carbon Brush Automation Project**, an industrial consultancy initiative aimed at streamlining and enhancing the manufacturing and quality assurance processes of carbon brushes. This project leverages advanced image processing and machine learning techniques to automate the inspection and classification of carbon brushes, ensuring high-quality standards and reducing manual labor. using Convolutional Neural Networks (CNNs) AI Module technique
 
 ## Table of Contents
 
