@@ -7,6 +7,8 @@ import numpy as np
 import glob
 import pickle
 
+python_project_env = r"label_env\Scripts\python.exe"
+
 def main_window():
     # Create the main root windows
     root = tk.Tk()
@@ -83,21 +85,21 @@ def goto_main_menu(root):
 
 def open_new_dataset(main_menu):
     # Run the new_dataset.py script
-    subprocess.Popen(["python", "new_dataset.py"])
+    subprocess.Popen([python_project_env, "new_dataset.py"])
 
 def open_select_brush():
     # Open a new window for Select Brush
-    subprocess.Popen(["python", "select_brush.py"])
+    subprocess.Popen([python_project_env, "select_brush.py"])
 
 def open_train():
     # Open a new window for Train
-    subprocess.Popen(["python", "training.py"])
+    subprocess.Popen([python_project_env, "training.py"])
     
 
 def open_daily_operations():
     # Open a new window for Daily Operations
     
-    process = subprocess.Popen(["python", "daily_operations.py"])
+    process = subprocess.Popen([python_project_env, "daily_operations.py"])
     print("Daily operation triggerd")
     # process.wait()
 

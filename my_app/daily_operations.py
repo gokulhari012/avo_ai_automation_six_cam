@@ -22,6 +22,7 @@ camera_index_list = [0,1,2,3,4,5]
 
 settings_file_path = "./settings.json"
 
+
 with open("configuration.json", "r") as file:
     json_data = json.load(file)
 
