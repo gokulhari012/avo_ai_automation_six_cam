@@ -1,5 +1,4 @@
 import cv2
-import numpy as np
 import pygame
 import serial
 import time
@@ -7,9 +6,7 @@ import time
 import threading
 import json
 import tkinter as tk
-from PIL import Image, ImageTk, ImageFont, ImageDraw
-import os
-import glob
+from PIL import Image, ImageTk
 from multiprocessing import Process
 import multiprocessing
 
@@ -20,7 +17,7 @@ is_ouput_required = False
 
 camera_index_list = [0,1,2,3,4,5]
 
-settings_file_path = "./settings.json"
+settings_file_path = "./json/settings.json"
 
 
 with open("configuration.json", "r") as file:
@@ -199,8 +196,8 @@ def main_program(camera_id, camera_index, running):
     previous_time = time.time() * 1000
     current_time = previous_time
 
-     # Read the folder name from brush.txt
-    with open("brush.txt", "r") as file:
+     # Read the folder name from selected_brush.txt
+    with open("json/selected_brush.txt", "r") as file:
         folder_name = "datasets/"+file.read().strip()+"/"+str(camera_id)
 
     # Read captured areas from the corresponding text file

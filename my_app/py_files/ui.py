@@ -1,13 +1,11 @@
 import tkinter as tk
-from PIL import Image, ImageTk, ImageFont, ImageDraw
+from PIL import Image, ImageTk
 import subprocess
 import os
-import cv2
-import numpy as np
 import glob
-import pickle
 
-python_project_env = r"label_env\Scripts\python.exe"
+# python_project_env = r"label_env\Scripts\python.exe" #For custom environment
+python_project_env = "python"
 
 def main_window():
     # Create the main root windows
@@ -85,21 +83,21 @@ def goto_main_menu(root):
 
 def open_new_dataset(main_menu):
     # Run the new_dataset.py script
-    subprocess.Popen([python_project_env, "new_dataset.py"])
+    subprocess.Popen([python_project_env, "py_files/new_dataset.py"])
 
 def open_select_brush():
     # Open a new window for Select Brush
-    subprocess.Popen([python_project_env, "select_brush.py"])
+    subprocess.Popen([python_project_env, "py_files/select_brush.py"])
 
 def open_train():
     # Open a new window for Train
-    subprocess.Popen([python_project_env, "training.py"])
+    subprocess.Popen([python_project_env, "py_files/training.py"])
     
 
 def open_daily_operations():
     # Open a new window for Daily Operations
     
-    process = subprocess.Popen([python_project_env, "daily_operations.py"])
+    process = subprocess.Popen([python_project_env, "py_files/daily_operations.py"])
     print("Daily operation triggerd")
     # process.wait()
 

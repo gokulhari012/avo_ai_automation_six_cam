@@ -70,8 +70,8 @@ def select_brush_window():
     window.mainloop()
 
 def save_brush_selection(folder, window):
-    # Save the selected folder name to brush.txt
-    with open("brush.txt", "w") as file:
+    # Save the selected folder name to selected_brush.txt
+    with open("json/selected_brush.txt", "w") as file:
         file.write(folder)
     print("DataSet "+str(folder)+" is selected")
     on_close(window)

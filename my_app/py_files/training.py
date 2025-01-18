@@ -12,7 +12,7 @@ with open("configuration.json", "r") as file:
 camera_index_list = json_data["camera_index_list"]
 
 folder_path = ""
-settings_file_path = "./settings.json"
+settings_file_path = "./json/settings.json"
 
 # Colors
 WHITE = (255, 255, 255)
@@ -300,7 +300,7 @@ def main_loop(camera_id):
 # Start threads for each camera
 for camera_id in camera_index_list:
     try:
-        with open("brush.txt", "r") as file:
+        with open("json/selected_brush.txt", "r") as file:
             folder_path = "datasets/"+file.read().strip()
         print(camera_id)    
         start_training_method(camera_id)
