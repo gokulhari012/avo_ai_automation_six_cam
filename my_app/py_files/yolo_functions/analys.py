@@ -1,5 +1,8 @@
 import cv2
 from ultralytics import YOLO
+import logging
+
+logging.getLogger("ultralytics").setLevel(logging.ERROR) 
 
 # Load the YOLOv8 model
 model_path = "train3/weights/best.pt"

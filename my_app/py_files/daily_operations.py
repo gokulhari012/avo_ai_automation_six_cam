@@ -1,5 +1,4 @@
 import cv2
-import pygame
 import serial
 import time
 import time
@@ -9,7 +8,7 @@ import tkinter as tk
 from PIL import Image, ImageTk
 from multiprocessing import Process
 import multiprocessing
-import py_files.yolo_functions.analys as yolo_analys
+import yolo_functions.analys as yolo_analys
 
 is_ouput_required = False
 # is_ouput_required = True
@@ -164,15 +163,16 @@ def main_program(camera_id, camera_index, running):
             print("Failed to capture image from webcam.")
             break
 
-        # Handle events
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                running.value = False
-
-        frame, cb_identified, defect_identified = yolo_analys.check(frame)
-        window_name = f"Camera id: {camera_id} index: {camera_index}"+"Q-quit"
+        frame, cb_identified, defect_identified = yolo_analys.check_frame(frame)
+        window_name = f"Camera id: {camera_id} index: {camera_index}"+" - Q-quit"
         cv2.imshow(window_name, frame)
-
+        # Check for key inputs
+        key = cv2.waitKey(1) & 0xFF
+        if key == ord('q'):  # Quit the stream
+            print(f"Closing All Cameras.")
+            running.value = False
+            break
+        
         if not cb_on_cam and cb_identified: 
             cb_on_cam = True
 
@@ -222,7 +222,6 @@ def on_close(window_close, running):
     # Close the window
     window_close.destroy()
     running.value = False
-    pygame.quit()
 
 if __name__ == "__main__":
     # multiprocessing.set_start_method("spawn")  # Ensure proper initialization
