@@ -86,8 +86,8 @@ def camera_stream(camera_id):
             break
         elif capture_photo_accept or key == ord('a'):
             capture_photo_accept = True
-            # save_snapshot(camera_index, frame, 'a')
-            # save_snapshot_all('a')
+            save_snapshot(camera_index, frame, 'a')
+            save_snapshot_all('a')
             time.sleep(1)
             capture_photo_accept = False
         elif capture_photo_reject or key == ord('r'):

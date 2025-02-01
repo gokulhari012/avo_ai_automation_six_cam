@@ -7,6 +7,7 @@ import json
 import tkinter as tk
 from PIL import Image, ImageTk
 import yolo_functions.analys as yolo_analys
+from pymodbus.client import ModbusTcpClient as ModbusClient
 import plc_communication as plc
 
 
@@ -50,7 +51,7 @@ if is_ouput_required:
     # Set servo to home position initially
     print("Servo set to home position.")
 
-servo_status = False
+servo_status = True
 brush_id = 0
 
 window_close = ""
@@ -63,6 +64,14 @@ GREEN = (0, 255, 0)
 BLACK = (0, 0, 0)
 
 import json
+
+def reset_brush():
+    global brush_id, servo_status, brush_map, last_updated_brush_id
+    servo_status = True
+    brush_id = 0
+    last_updated_brush_id = {i:0 for i in range(6)}
+    brush_map = {}
+    plc.setup(plc_ip_address)
 
 def save_variable(variable_name, value):
     try:
@@ -119,6 +128,7 @@ def append_and_rotate(camera_index, new_value):
 # Function to relay final decision to Arduino and update servo
 def relay_servo_command(status):
     global servo_status
+    print("Inside Servo control")
     time.sleep(rejection_time_delay/1000)
     if status != servo_status:  # Only send command if the status changes
         if status:
@@ -148,9 +158,9 @@ def check_diagonal():
 
 def check_brush(brush_id):
     if 1 in brush_map[brush_id]:
-        return False
+        return False # not accepted
     else:
-        return True
+        return True # accepted
     
 def rejection_machanism(brush_id):
     global brush_map
@@ -222,7 +232,7 @@ def main_program(camera_id, camera_index):
             running = False
             # window_close.destroy()
             break
-        
+
         if make_delay:
             current_time = time.time() * 1000
             if(previous_time + brush_left_time_delay < current_time):
@@ -249,7 +259,11 @@ def main_program(camera_id, camera_index):
                     rejection_machanism(last_updated_brush_id[last_camera])
                 make_delay = True
                 previous_time = time.time() * 1000
-
+        
+        if key == ord('r'):
+            reset_brush()
+            print("Reseted brush")
+            
     if is_ouput_required:
         plc.close()
 
