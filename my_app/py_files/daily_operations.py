@@ -7,9 +7,7 @@ import json
 import tkinter as tk
 from PIL import Image, ImageTk
 import yolo_functions.analys as yolo_analys
-is_ouput_required = False
-# is_ouput_required = True
-
+import plc_communication as plc
 
 
 camera_index_list = [0,1,2,3,4,5]
@@ -23,8 +21,8 @@ with open("configuration.json", "r") as file:
 running = True
 
 camera_index_list = json_data["camera_index_list"]
-time_delay = json_data["time_delay"] #time delay to take pictures
-arduino_com_port = json_data["arduino_com_port"] #time delay to take pictures
+rejection_time_delay = json_data["rejection_time_delay"] #time delay to take pictures
+plc_ip_address = json_data["plc_ip_address"] #time delay to take pictures
 is_ouput_required = json_data["is_ouput_required"] #arduino connection status.
 
 camera_0 = [0,0,0,0,0,0]
@@ -48,12 +46,8 @@ last_camera = 5
 first_camera = 0
 
 if is_ouput_required:
-    # Set up serial communication with Arduino
-    ser = serial.Serial(arduino_com_port, 9600)  # Replace 'COM7' with your actual port
-    time.sleep(0.5)  # Reduced delay for Arduino initialization
-
+    plc.setup(plc_ip_address)
     # Set servo to home position initially
-    ser.write(b'H')
     print("Servo set to home position.")
 
 servo_status = False
@@ -125,14 +119,15 @@ def append_and_rotate(camera_index, new_value):
 # Function to relay final decision to Arduino and update servo
 def relay_servo_command(status):
     global servo_status
+    time.sleep(rejection_time_delay/1000)
     if status != servo_status:  # Only send command if the status changes
         if status:
             if is_ouput_required:
-                ser.write(b'A')  # Send "accepted" command
+                plc.write(0)  # Send "accepted" command
             print("Sent command: Accepted")
         else:
             if is_ouput_required:
-                ser.write(b'R')  # Send "rejected" command to stay at home
+                plc.write(1)  # Send "rejected" command to stay at home
             print("Sent command: Rejected")
         servo_status = status  # Update the servo status
 
@@ -161,7 +156,8 @@ def rejection_machanism(brush_id):
     global brush_map
     try:
         brush_status = check_brush(brush_id)
-        relay_servo_command(brush_status)
+        t = threading.Thread(target=relay_servo_command, args=(brush_status,))
+        t.start()
         if brush_status:
             print("Brush "+str(brush_id)+" is Accepted")
         else:
@@ -255,7 +251,7 @@ def main_program(camera_id, camera_index):
                 previous_time = time.time() * 1000
 
     if is_ouput_required:
-        ser.close()
+        plc.close()
 
 def daily_operation_window():
     global window_close
