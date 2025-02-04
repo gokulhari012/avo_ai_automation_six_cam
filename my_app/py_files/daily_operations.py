@@ -25,6 +25,7 @@ camera_index_list = json_data["camera_index_list"]
 rejection_time_delay = json_data["rejection_time_delay"] #time delay to take pictures
 plc_ip_address = json_data["plc_ip_address"] #time delay to take pictures
 is_ouput_required = json_data["is_ouput_required"] #arduino connection status.
+brush_left_time_delay = json_data["brush_left_time_delay"]
 
 camera_0 = [0,0,0,0,0,0]
 camera_1 = [0,0,0,0,0,0]
@@ -36,7 +37,6 @@ camera_map = {0:camera_0,1:camera_1,2:camera_2,3:camera_3,4:camera_4,5:camera_5}
 
 #0 for not detect - 1 - defect - 2 is good breash
 last_updated_brush_id = {i:0 for i in range(6)}
-brush_left_time_delay = 0.5
 
 brush_map = {}
 

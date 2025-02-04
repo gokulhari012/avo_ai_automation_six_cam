@@ -4,7 +4,6 @@ import time
 import shutil
 import threading
 import json
-import yolo_functions.analys as yolo_analys
 
 # Constants
 width, video_height = 800, 600  # Window size
@@ -17,7 +16,7 @@ with open("configuration.json", "r") as file:
     json_data = json.load(file)
 
 camera_index_list = json_data["camera_index_list"]
-brush_left_time_delay = json_data["brush_left_time_delay"]
+time_delay = json_data["time_delay"] #time delay to take pictures
 
 thread_list = []
 start_capturing = False
@@ -56,19 +55,6 @@ def save_snapshot(camera_id, frame):
         print(f"Snapshot saved: {filename}")
     else:
         print("No dataset folder exists. Please create a dataset first.")
-    
-    return filename
-
-def save_snapshot_labled(camera_id, frame):
-    create_dataset(camera_id)
-    global record_folder
-    camera_id = str(camera_id)
-    if record_folder and os.path.isdir(record_folder + "/" + camera_id):
-        filename = os.path.join(record_folder + "/" + camera_id, f'snapshot_labeled_{int(time.time())}.jpg')
-        cv2.imwrite(filename, frame)
-        print(f"Snapshot labeled saved: {filename}")
-    else:
-        print("No dataset folder exists. Please create a dataset first.")
 
 # Merge datasets
 def merge_datasets():
@@ -82,27 +68,12 @@ def merge_datasets():
             shutil.copy2(src, dst)
     print(f"All datasets merged into '{common_folder}'.")
 
-def save_anotation(file_path, captured_position, captured_frame):
-    # Save annotations
-    # annotation_path = path.replace(".jpg", ".txt")
-    with open(file_path, "w") as f:
-        x1, y1, x2, y2 = captured_position
-        label = 0
-        # Save annotation in YOLO format: class x_center y_center width height (normalized)
-        x_center = (x1 + x2) / (2 * captured_frame.shape[1])
-        y_center = (y1 + y2) / (2 * captured_frame.shape[0])
-        width = (x2 - x1) / captured_frame.shape[1]
-        height = (y2 - y1) / captured_frame.shape[0]
-        f.write(f"{int(label)} {x_center:.6f} {y_center:.6f} {width:.6f} {height:.6f}\n")
-        print(f"labeled file saved: {file_path}")
-
 # Main function for each camera
 def main_program(camera_id, camera):
     global start_capturing, run
 
     previous_time = time.time() * 1000
     current_time = previous_time
-    make_delay = False
 
     print(f"Starting camera {camera_id}")
     window_name = f"Camera id: {camera_id} index: {camera_index_list.index(camera_id)}"+" - S-Start, Q-quit"
@@ -114,26 +85,8 @@ def main_program(camera_id, camera):
             break
 
         # Display the video feed
-        brush_id = "cb1"
-        if start_capturing:
-            if make_delay:
-                current_time = time.time() * 1000
-                if(previous_time + brush_left_time_delay < current_time):
-                    previous_time = current_time
-                    make_delay = False
-            else:
-                frame, status, captured_frame, captured_position = yolo_analys.capture_cb(frame, brush_id)
-                if status:
-                    filename = ""
-                    if captured_frame is not None and captured_frame.size > 0:
-                        filename = save_snapshot(camera_id,captured_frame)
-                        save_snapshot_labled(camera_id,frame)
-                        make_delay = True
-                        if captured_position!=None:
-                            save_anotation(filename.replace(".jpg",".txt"),captured_position,captured_frame)
-
         cv2.imshow(window_name, frame)
-        
+
         # Check for key inputs
         key = cv2.waitKey(1) & 0xFF
         if key == ord('q'):  # Quit the stream
@@ -142,28 +95,25 @@ def main_program(camera_id, camera):
             start_capturing = False
             break
         elif key == ord('c'):  # Create dataset
-            # create_dataset(camera_id)
-            pass
+            create_dataset(camera_id)
         elif key == ord('s'):  # Save snapshot
-            # print("Capturing Started")
+            print("Capturing Started")
             start_capturing = True
             # save_snapshot(camera_id, frame)
         elif key == ord('m'):  # Merge datasets
-            # merge_datasets()
-            pass
+            merge_datasets()
 
-        # if start_capturing:
-        #     current_time = time.time() * 1000
-        #     if(previous_time + time_delay < current_time):
-        #         previous_time = current_time
-        #         save_snapshot(camera_id, frame)
+        if start_capturing:
+            current_time = time.time() * 1000
+            if(previous_time + time_delay < current_time):
+                previous_time = current_time
+                save_snapshot(camera_id, frame)
 
     # Cleanup
     camera.release()
     cv2.destroyWindow(window_name)
 
 # Start threads for each camera
-start_capturing = True
 for camera_id in camera_index_list:
     try:
         camera = cv2.VideoCapture(camera_id, cv2.CAP_DSHOW)
