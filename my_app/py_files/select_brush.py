@@ -20,7 +20,7 @@ def select_brush_window():
     bg_label.place(relwidth=1, relheight=1)
 
     # List all dataset folders and create buttons with custom font and image
-    dataset_folders = [folder for folder in os.listdir('./datasets') if os.path.isdir(os.path.join('./datasets', folder)) and folder.startswith('dataset_')]
+    dataset_folders = [folder for folder in os.listdir('./datasets') if os.path.isdir(os.path.join('./datasets', folder)) and folder.startswith('brushID_')]
     font_path = "assets/Loubag-Bold.ttf"
     font_size = 70
     font = ImageFont.truetype(font_path, font_size)

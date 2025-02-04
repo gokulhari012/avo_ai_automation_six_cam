@@ -52,3 +52,4 @@ setuptools>=70.0.0 # Snyk vulnerability fix
 opencv-python>=4.11.0
 pygame>=2.6.1
 serial
+pip install pyyaml

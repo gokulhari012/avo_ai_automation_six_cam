@@ -26,9 +26,9 @@ run = True
 # Function to get the next dataset folder name
 def get_next_dataset_folder():
     dataset_count = 1
-    while os.path.exists(f"datasets/dataset_{dataset_count}"):
+    while os.path.exists(f"datasets/brushID_{dataset_count}"):
         dataset_count += 1
-    return f"datasets/dataset_{dataset_count}"
+    return f"datasets/brushID_{dataset_count}"
 
 # Create a new dataset folder
 def create_dataset(camera_id):
@@ -74,7 +74,7 @@ def save_snapshot_labled(camera_id, frame):
 def merge_datasets():
     common_folder = 'datasets/common_dataset'
     os.makedirs(common_folder, exist_ok=True)
-    dataset_folders = [folder for folder in os.listdir('./datasets') if os.path.isdir(folder) and folder.startswith('dataset_')]
+    dataset_folders = [folder for folder in os.listdir('./datasets') if os.path.isdir(folder) and folder.startswith('brushID_')]
     for folder in dataset_folders:
         for file in os.listdir(f"./datasets/{folder}"):
             src = os.path.join(f"./datasets/{folder}", file)
@@ -87,7 +87,7 @@ def save_anotation(file_path, captured_position, captured_frame):
     # annotation_path = path.replace(".jpg", ".txt")
     with open(file_path, "w") as f:
         x1, y1, x2, y2 = captured_position
-        label = 0
+        label = int(file_path.split("_")[-1])
         # Save annotation in YOLO format: class x_center y_center width height (normalized)
         x_center = (x1 + x2) / (2 * captured_frame.shape[1])
         y_center = (y1 + y2) / (2 * captured_frame.shape[0])

@@ -1,6 +1,4 @@
 import cv2
-import serial
-import time
 import time
 import threading
 import json
@@ -53,6 +51,11 @@ if is_ouput_required:
 
 servo_status = True
 brush_id = 0
+
+brush_id_name = ""
+# Read the folder name from selected_brush.txt
+with open("json/selected_brush.txt", "r") as file:
+    brush_id_name = file.read().strip()
 
 window_close = ""
 # Button dimensions
@@ -205,10 +208,6 @@ def main_program(camera_id, camera_index):
         print(f"Error: Could not open camera id {camera_id} index{camera_index}")
         return
     
-     # Read the folder name from selected_brush.txt
-    with open("json/selected_brush.txt", "r") as file:
-        folder_name = "datasets/"+file.read().strip()+"/"+str(camera_index)
-    
     previous_time = time.time() * 1000    
     cb_on_cam = False
     any_defect_identified = False
@@ -221,7 +220,7 @@ def main_program(camera_id, camera_index):
             print("Failed to capture image from webcam.")
             break
         # t = time.process_time()
-        frame, cb_identified, defect_identified = yolo_analys.check_frame(frame, last_updated_brush_id[camera_index]+1)
+        frame, cb_identified, defect_identified = yolo_analys.check_frame(frame, last_updated_brush_id[camera_index]+1,brush_id_name)
         # print(time.process_time()-t)
         window_name = f"Camera id: {camera_id} index: {camera_index}"+" - Q-quit"
         cv2.imshow(window_name, frame)
