@@ -51,7 +51,7 @@ def save_snapshot(camera_id, frame):
     global record_folder
     camera_id = str(camera_id)
     if record_folder and os.path.isdir(record_folder + "/" + camera_id):
-        filename = os.path.join(record_folder + "/" + camera_id, f'{record_folder.split("/")[0]}_{camera_id}_accept_{int(time.time())}.jpg')
+        filename = os.path.join(record_folder + "/" + camera_id, f'{record_folder.split("/")[0]}_{camera_id}_accept_{int(time.time()*1000)}.jpg')
         cv2.imwrite(filename, frame)
         print(f"Snapshot saved: {filename}")
     else:
@@ -59,12 +59,12 @@ def save_snapshot(camera_id, frame):
     
     return filename
 
-def save_snapshot_labled(camera_id, frame):
+def save_snapshot_labled(filename,camera_id, frame):
     create_dataset(camera_id)
     global record_folder
     camera_id = str(camera_id)
     if record_folder and os.path.isdir(record_folder + "/" + camera_id):
-        filename = os.path.join(record_folder + "/" + camera_id, f'{record_folder.split("/")[0]}_{camera_id}_accept_labeled_{int(time.time())}.jpg')
+        # filename = os.path.join(record_folder + "/" + camera_id, f'{record_folder.split("/")[0]}_{camera_id}_accept_labeled_{int(time.time())}.jpg')
         # filename = os.path.join(record_folder + "/" + camera_id, f'snapshot_labeled_{int(time.time())}.jpg')
         cv2.imwrite(filename, frame)
         print(f"Snapshot labeled saved: {filename}")
@@ -128,7 +128,7 @@ def main_program(camera_id, camera):
                     filename = ""
                     if captured_frame is not None and captured_frame.size > 0:
                         filename = save_snapshot(camera_id,captured_frame)
-                        save_snapshot_labled(camera_id,frame)
+                        save_snapshot_labled(filename.replace(".jpg","_labeled.jpg"),camera_id,frame)
                         make_delay = True
                         if captured_position!=None:
                             save_anotation(filename.replace(".jpg",".txt"),captured_position,captured_frame)

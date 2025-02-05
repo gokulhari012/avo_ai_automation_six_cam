@@ -68,11 +68,11 @@ def on_close(window_close):
     window_close.destroy()
     running = False
 
-def move_to_common():
+def copy_to_common():
     
     # Remove the existing directory and all its contents if it exists
-    if os.path.exists(destination_directory):
-        shutil.rmtree(destination_directory)
+    # if os.path.exists(destination_directory):
+    #     shutil.rmtree(destination_directory)
 
     # Create the destination directory if it doesn't exist
     os.makedirs(destination_directory, exist_ok=True)
@@ -85,15 +85,21 @@ def move_to_common():
                 destination_path = os.path.join(destination_directory, file)
                 
                 # Ensure file name uniqueness
-                if os.path.exists(destination_path):
-                    base, ext = os.path.splitext(file)
-                    count = 1
-                    while os.path.exists(destination_path):
-                        destination_path = os.path.join(destination_directory, f"{base}_{count}{ext}")
-                        count += 1
+                # if os.path.exists(destination_path):
+                #     base, ext = os.path.splitext(file)
+                #     count = 1
+                #     while os.path.exists(destination_path):
+                #         destination_path = os.path.join(destination_directory, f"{base}_{count}{ext}")
+                #         count += 1
+                # Check if the file already exists in the destination
+                if not os.path.exists(destination_path):
+                    shutil.copy2(source_path, destination_path)  # Preserve metadata
+                    # print(f"Copied: {filename}")
+                # else:
+                    # print(f"Skipped: {filename} (Already exists)")
                 
                 # shutil.move(source_path, destination_path)
-                shutil.copy2(source_path, destination_path) # Preserves metadata like timestamps
+                # shutil.copy2(source_path, destination_path) # Preserves metadata like timestamps
                 # shutil.copytree(source_path, destination_path, dirs_exist_ok=True)
             print("All files have been Copied successfully!")
 
@@ -141,7 +147,7 @@ def update_data_yml():
         print(f"Error updating YAML file: {e}")
 
 def training_model():
-    #move_to_common()
+    copy_to_common()
     update_data_yml()
     # yaml_file = r"C:\Users\gokul\Documents\projects\Avo Six Camera Ai\repo\avo_ai_automation_six_cam\my_app\yolo_functions\data.yml"
     # yolo_model = r"C:\Users\gokul\Documents\projects\Avo Six Camera Ai\repo\avo_ai_automation_six_cam\my_app\yolo_functions\yolo11n.pt"
