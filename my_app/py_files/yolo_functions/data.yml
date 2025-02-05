@@ -1,5 +1,9 @@
-train: C:\Users\gokul\Documents\projects\Avo Six Camera Ai\repo\avo_ai_automation_six_cam\my_app\datasets\colleged_dataset  # Path to your training images
-val: C:\Users\gokul\Documents\projects\Avo Six Camera Ai\repo\avo_ai_automation_six_cam\my_app\datasets\colleged_dataset  # Path to your validation images
-
-nc: 2  # Number of classes in your dataset
-names: ['cb','defect']  # List of class names
+train: C:\Users\gokul\Documents\projects\Avo Six Camera Ai\repo\avo_ai_automation_six_cam\my_app\colleged_dataset
+val: C:\Users\gokul\Documents\projects\Avo Six Camera Ai\repo\avo_ai_automation_six_cam\my_app\colleged_dataset
+nc: 5
+names:
+- brushID_0
+- brushID_1
+- brushID_2
+- brushID_3
+- brushID_4

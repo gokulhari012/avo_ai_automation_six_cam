@@ -4,7 +4,8 @@ import logging
 import numpy as np
 
 logging.getLogger("ultralytics").setLevel(logging.ERROR) 
-confidence = 0.40
+confidence = 0.50
+square_value = 100
 
 # Load the YOLOv8 model
 common_knowledge_path = "common_knowledge/weights/best.pt"
@@ -12,6 +13,7 @@ common_knowledge_path = "common_knowledge/weights/best.pt"
 common_knowledge_model = YOLO(common_knowledge_path)
 # Get class names and colors
 common_knowledge_class_names = common_knowledge_model.names
+
 
 brush_knowledge_path = "brush_knowledge/weights/best.pt"
 brush_knowledge_model = YOLO(brush_knowledge_path)
@@ -26,7 +28,8 @@ def check_frame(frame, brush_count_id, brush_id):
     # Perform detection
     results = brush_knowledge_model(frame)
     detections = results[0]
-
+    label_confidence_map = {}
+    label_value_map = {}
     # Draw bounding boxes
     for box in detections.boxes:
         x1, y1, x2, y2 = map(int, box.xyxy[0].tolist())
@@ -34,21 +37,30 @@ def check_frame(frame, brush_count_id, brush_id):
         class_id = int(box.cls[0].item())
         class_name = brush_knowledge_class_names[class_id]
         #if True:
-        if conf > confidence and (class_name == 'defect' or class_name == 'cb'):  # Modify condition as needed
-            color = colors[class_name]
-            cv2.rectangle(frame, (x1, y1), (x2, y2), color, 2)
-            if class_name == brush_id: 
-                label = f"Brush ID: {brush_count_id}: {conf:.2f}"
-            else:
-                label = f"{class_name}: {conf:.2f}"
-            cv2.putText(frame, label, (x1, y1 - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, color, 2)
+        if conf > confidence:  # Modify condition as needed
+            if class_name == "brushID_0": # brushID_0 is defect
+                color = colors["defect"]
+                cv2.rectangle(frame, (x1, y1), (x2, y2), color, 2)
+                label = f"defect: {conf:.2f}"
+                cv2.putText(frame, label, (x1, y1 - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, color, 2)
+            else :
+                label_confidence_map[class_name] = conf
+                label_value_map[class_name] = (x1, y1, x2, y2)
 
-        if not cb_identified and class_name == "cb":
+            if not defect_identified and class_name == "brushID_0":
+                defect_identified = True
+
+    if label_confidence_map and label_value_map:
+        maxmium_confidence_brush = max(label_confidence_map, key=label_confidence_map.get)
+        color = colors["cb"]
+        conf = label_confidence_map[maxmium_confidence_brush]
+        x1, y1, x2, y2 =  label_value_map[maxmium_confidence_brush]
+        cv2.rectangle(frame, (x1, y1), (x2, y2), color, 2)
+        label = f"BrushID: {maxmium_confidence_brush} - CountID: {brush_count_id} - Conf: {conf:.2f}"
+        cv2.putText(frame, label, (x1, y1 - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, color, 2)
+        if not cb_identified and class_name == brush_id:
             cb_identified = True
-        if not defect_identified and class_name == "defect":
-            defect_identified = True
 
-    
     return frame, cb_identified, defect_identified
 
 def capture_cb(frame, brush_id):
@@ -75,7 +87,6 @@ def capture_cb(frame, brush_id):
             # Object center
             obj_center_x, obj_center_y = x2 // 2, y2 // 2
             # Check if object is near center
-            square_value = 50
             if abs(center_x-square_value) < obj_center_x and (center_x+square_value) > obj_center_x and abs(center_y-square_value) < obj_center_y and abs(center_y+square_value) > obj_center_y:
                 print(f"Object '{class_name}' centered! Capturing image.")
                 captured_position = x1, y1, x2, y2

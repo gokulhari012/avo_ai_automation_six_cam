@@ -51,7 +51,7 @@ def save_snapshot(camera_id, frame):
     global record_folder
     camera_id = str(camera_id)
     if record_folder and os.path.isdir(record_folder + "/" + camera_id):
-        filename = os.path.join(record_folder + "/" + camera_id, f'snapshot_{int(time.time())}.jpg')
+        filename = os.path.join(record_folder + "/" + camera_id, f'{record_folder.split("/")[0]}_{camera_id}_accept_{int(time.time())}.jpg')
         cv2.imwrite(filename, frame)
         print(f"Snapshot saved: {filename}")
     else:
@@ -64,7 +64,8 @@ def save_snapshot_labled(camera_id, frame):
     global record_folder
     camera_id = str(camera_id)
     if record_folder and os.path.isdir(record_folder + "/" + camera_id):
-        filename = os.path.join(record_folder + "/" + camera_id, f'snapshot_labeled_{int(time.time())}.jpg')
+        filename = os.path.join(record_folder + "/" + camera_id, f'{record_folder.split("/")[0]}_{camera_id}_accept_labeled_{int(time.time())}.jpg')
+        # filename = os.path.join(record_folder + "/" + camera_id, f'snapshot_labeled_{int(time.time())}.jpg')
         cv2.imwrite(filename, frame)
         print(f"Snapshot labeled saved: {filename}")
     else:
@@ -87,7 +88,7 @@ def save_anotation(file_path, captured_position, captured_frame):
     # annotation_path = path.replace(".jpg", ".txt")
     with open(file_path, "w") as f:
         x1, y1, x2, y2 = captured_position
-        label = int(file_path.split("_")[-1])
+        label = int(record_folder.split("_")[-1])
         # Save annotation in YOLO format: class x_center y_center width height (normalized)
         x_center = (x1 + x2) / (2 * captured_frame.shape[1])
         y_center = (y1 + y2) / (2 * captured_frame.shape[0])
