@@ -78,6 +78,7 @@ def update_data_yml():
     current_directory = os.getcwd()
     current_directory = current_directory+"/"+yaml_file
     dataset_folders = [folder for folder in os.listdir('./datasets') if os.path.isdir(os.path.join('./datasets', folder)) and folder.startswith('brushID_')]
+    dataset_folders.insert(0,"defect")
     new_data = {
         "train": current_directory,
         "val": current_directory,
