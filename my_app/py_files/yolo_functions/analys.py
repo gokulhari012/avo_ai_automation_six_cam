@@ -21,7 +21,7 @@ brush_knowledge_class_names = brush_knowledge_model.names
 
 colors = {"cb":(0,255,0),"defect":(0,0,255)}
 
-def check_frame(frame, brush_count_id, brush_id):
+def check_frame(frame, brush_count_id, brush_id): 
     cb_identified = False 
     defect_identified = False 
     
@@ -38,7 +38,7 @@ def check_frame(frame, brush_count_id, brush_id):
         class_name = brush_knowledge_class_names[class_id]
         #if True:
         if conf > confidence:  # Modify condition as needed
-            if class_name == "brushID_0": # brushID_0 is defect
+            if class_name == "brushID_0" or class_name == 'defect': # brushID_0 is defect
                 color = colors["defect"]
                 cv2.rectangle(frame, (x1, y1), (x2, y2), color, 2)
                 label = f"defect: {conf:.2f}"
@@ -47,7 +47,7 @@ def check_frame(frame, brush_count_id, brush_id):
                 label_confidence_map[class_name] = conf
                 label_value_map[class_name] = (x1, y1, x2, y2)
 
-            if not defect_identified and class_name == "brushID_0":
+            if not defect_identified and  (class_name == "brushID_0" or class_name == 'defect'):
                 defect_identified = True
 
     if label_confidence_map and label_value_map:
@@ -58,7 +58,7 @@ def check_frame(frame, brush_count_id, brush_id):
         cv2.rectangle(frame, (x1, y1), (x2, y2), color, 2)
         label = f"BrushID: {maxmium_confidence_brush} - CountID: {brush_count_id} - Conf: {conf:.2f}"
         cv2.putText(frame, label, (x1, y1 - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, color, 2)
-        if not cb_identified and class_name == brush_id:
+        if not cb_identified and (class_name == brush_id or class_name == "cb"):
             cb_identified = True
 
     return frame, cb_identified, defect_identified

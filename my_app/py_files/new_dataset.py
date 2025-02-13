@@ -115,7 +115,7 @@ def main_program(camera_id, camera):
             break
 
         # Display the video feed
-        brush_id = "cb1"
+        brush_id = "cb"
         if start_capturing:
             if make_delay:
                 current_time = time.time() * 1000
