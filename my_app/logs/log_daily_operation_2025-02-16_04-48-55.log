@@ -1,0 +1,39 @@
+2025-02-16 04:48:56,089 - INFO - Servo set to home position.
+2025-02-16 04:49:06,096 - INFO - cp identified 1
+2025-02-16 04:49:06,097 - INFO - cb
+2025-02-16 04:49:06,097 - INFO - Cb Dimention wXh: (21.0, 30.3)
+2025-02-16 04:49:06,097 - INFO - cp identified 2: False Class Name: cb
+2025-02-16 04:49:06,097 - INFO - cp identified 3
+2025-02-16 04:49:07,351 - INFO - Expected Dimension: 11620.5
+2025-02-16 04:49:07,351 - INFO - Contour Dimension: 8521.0
+2025-02-16 04:49:07,351 - INFO - Tolarance: 2000 Diff: -3099.5
+2025-02-16 04:49:07,353 - INFO - New brush created with ID: 1
+2025-02-16 04:49:07,355 - INFO - Brush reject due to dimension not fit
+2025-02-16 04:49:07,355 - INFO - _________CB START_________
+2025-02-16 04:49:07,355 - INFO - defect : False
+2025-02-16 04:49:07,355 - INFO - any_defect_identified : True
+2025-02-16 04:49:07,355 - INFO - cb_on_cam : True
+2025-02-16 04:49:07,355 - INFO - cb_identified : True
+2025-02-16 04:49:07,355 - INFO - _________CB END_________
+2025-02-16 04:49:07,637 - INFO - cp identified 1
+2025-02-16 04:49:07,637 - INFO - cb
+2025-02-16 04:49:07,637 - INFO - Cb Dimention wXh: (21.1, 34.1)
+2025-02-16 04:49:07,637 - INFO - cp identified 2: False Class Name: cb
+2025-02-16 04:49:07,637 - INFO - cp identified 3
+2025-02-16 04:49:07,640 - INFO - Expected Dimension: 11620.5
+2025-02-16 04:49:07,640 - INFO - Contour Dimension: 0
+2025-02-16 04:49:07,640 - INFO - Tolarance: 2000 Diff: -11620.5
+2025-02-16 04:49:07,643 - INFO - _________CB START_________
+2025-02-16 04:49:07,643 - INFO - defect : False
+2025-02-16 04:49:07,643 - INFO - any_defect_identified : True
+2025-02-16 04:49:07,643 - INFO - cb_on_cam : True
+2025-02-16 04:49:07,643 - INFO - cb_identified : True
+2025-02-16 04:49:07,643 - INFO - _________CB END_________
+2025-02-16 04:49:07,929 - INFO - Cam: 0 current brush ID: 1 Value: 1
+2025-02-16 04:49:07,929 - INFO - brush left
+
+
+
+
+2025-02-16 04:49:15,022 - INFO - Closing All Cameras.
+2025-02-16 04:49:15,735 - INFO - All camera daily operations are closed

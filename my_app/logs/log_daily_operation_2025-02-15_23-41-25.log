@@ -1,0 +1,8 @@
+2025-02-15 23:41:26,347 - INFO - Servo set to home position.
+2025-02-15 23:41:28,390 - INFO - cp identified 1
+2025-02-15 23:41:28,391 - INFO - cb
+2025-02-15 23:41:28,391 - INFO - Cb Dimention wXh: (36.4, 27.6)
+2025-02-15 23:41:28,391 - INFO - cp identified 2: False Class Name: cb
+2025-02-15 23:41:28,391 - INFO - cp identified 3
+2025-02-15 23:41:32,462 - INFO - Closing All Cameras.
+2025-02-15 23:42:05,428 - INFO - All camera daily operations are closed

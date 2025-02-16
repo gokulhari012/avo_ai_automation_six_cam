@@ -16,7 +16,10 @@ with open("configuration.json", "r") as file:
     json_data = json.load(file)
 
 camera_index_list = json_data["camera_index_list"]
-time_delay = json_data["time_delay"] #time delay to take pictures
+rejection_time_delay = json_data["rejection_time_delay"] #time delay to take pictures
+plc_ip_address = json_data["plc_ip_address"] #time delay to take pictures
+is_ouput_required = json_data["is_ouput_required"] #arduino connection status.
+brush_left_time_delay = json_data["brush_left_time_delay"]
 
 thread_list = []
 start_capturing = False

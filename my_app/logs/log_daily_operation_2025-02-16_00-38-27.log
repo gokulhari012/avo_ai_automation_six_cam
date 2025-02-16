@@ -1,0 +1,21 @@
+2025-02-16 00:38:27,941 - INFO - Servo set to home position.
+2025-02-16 00:38:39,534 - INFO - cp identified 1
+2025-02-16 00:38:39,535 - INFO - cb
+2025-02-16 00:38:39,535 - INFO - Cb Dimention wXh: (28.5, 15.4)
+2025-02-16 00:38:39,535 - INFO - cp identified 2: False Class Name: cb
+2025-02-16 00:38:39,535 - INFO - cp identified 3
+2025-02-16 00:38:39,540 - INFO - New brush created with ID: 1
+2025-02-16 00:38:39,540 - INFO - _________CB START_________
+2025-02-16 00:38:39,540 - INFO - defect : False
+2025-02-16 00:38:39,540 - INFO - any_defect_identified : False
+2025-02-16 00:38:39,542 - INFO - cb_on_cam : True
+2025-02-16 00:38:39,542 - INFO - cb_identified : True
+2025-02-16 00:38:39,542 - INFO - _________CB END_________
+2025-02-16 00:38:39,823 - INFO - Cam: 0 current brush ID: 1 Value: 2
+2025-02-16 00:38:39,823 - INFO - brush left
+
+
+
+
+2025-02-16 00:38:51,777 - INFO - Closing All Cameras.
+2025-02-16 00:38:52,555 - INFO - All camera daily operations are closed

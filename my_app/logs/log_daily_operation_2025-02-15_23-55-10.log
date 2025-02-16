@@ -1,0 +1,32 @@
+2025-02-15 23:55:11,454 - INFO - Servo set to home position.
+2025-02-15 23:55:15,636 - INFO - cp identified 1
+2025-02-15 23:55:15,637 - INFO - cb
+2025-02-15 23:55:15,637 - INFO - Cb Dimention wXh: (40.0, 17.400000000000002)
+2025-02-15 23:55:15,637 - INFO - cp identified 2: False Class Name: cb
+2025-02-15 23:55:15,637 - INFO - cp identified 3
+2025-02-15 23:55:16,600 - INFO - New brush created with ID: 1
+2025-02-15 23:55:16,600 - INFO - _________CB START_________
+2025-02-15 23:55:16,600 - INFO - defect : False
+2025-02-15 23:55:16,600 - INFO - any_defect_identified : False
+2025-02-15 23:55:16,601 - INFO - cb_on_cam : True
+2025-02-15 23:55:16,602 - INFO - cb_identified : True
+2025-02-15 23:55:16,602 - INFO - _________CB END_________
+2025-02-15 23:55:16,862 - INFO - cp identified 1
+2025-02-15 23:55:16,863 - INFO - cb
+2025-02-15 23:55:16,863 - INFO - Cb Dimention wXh: (40.7, 17.8)
+2025-02-15 23:55:16,863 - INFO - cp identified 2: False Class Name: cb
+2025-02-15 23:55:16,863 - INFO - cp identified 3
+2025-02-15 23:55:16,869 - INFO - _________CB START_________
+2025-02-15 23:55:16,869 - INFO - defect : False
+2025-02-15 23:55:16,869 - INFO - any_defect_identified : False
+2025-02-15 23:55:16,869 - INFO - cb_on_cam : True
+2025-02-15 23:55:16,869 - INFO - cb_identified : True
+2025-02-15 23:55:16,869 - INFO - _________CB END_________
+2025-02-15 23:55:17,155 - INFO - Cam: 0 current brush ID: 1 Value: 2
+2025-02-15 23:55:17,155 - INFO - brush left
+
+
+
+
+2025-02-15 23:55:20,366 - INFO - Closing All Cameras.
+2025-02-15 23:55:21,084 - INFO - All camera daily operations are closed

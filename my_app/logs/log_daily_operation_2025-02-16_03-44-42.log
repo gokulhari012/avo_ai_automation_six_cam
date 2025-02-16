@@ -1,0 +1,52 @@
+2025-02-16 03:44:42,771 - INFO - Servo set to home position.
+2025-02-16 03:45:16,640 - INFO - cp identified 1
+2025-02-16 03:45:16,641 - INFO - cb
+2025-02-16 03:45:16,641 - INFO - Cb Dimention wXh: (23.8, 23.3)
+2025-02-16 03:45:16,641 - INFO - cp identified 2: False Class Name: cb
+2025-02-16 03:45:16,641 - INFO - cp identified 3
+2025-02-16 03:45:16,645 - INFO - Expected Dimension: 11620.5
+2025-02-16 03:45:16,646 - INFO - Contour Dimension: 12026.0
+2025-02-16 03:45:16,646 - INFO - Tolarance: 3000 Diff: 405.5
+2025-02-16 03:45:16,649 - INFO - New brush created with ID: 1
+2025-02-16 03:45:16,651 - INFO - _________CB START_________
+2025-02-16 03:45:16,651 - INFO - defect : False
+2025-02-16 03:45:16,651 - INFO - any_defect_identified : False
+2025-02-16 03:45:16,651 - INFO - cb_on_cam : True
+2025-02-16 03:45:16,651 - INFO - cb_identified : True
+2025-02-16 03:45:16,651 - INFO - _________CB END_________
+2025-02-16 03:45:16,933 - INFO - cp identified 1
+2025-02-16 03:45:16,933 - INFO - cb
+2025-02-16 03:45:16,933 - INFO - Cb Dimention wXh: (23.5, 24.5)
+2025-02-16 03:45:16,934 - INFO - cp identified 2: False Class Name: cb
+2025-02-16 03:45:16,934 - INFO - cp identified 3
+2025-02-16 03:45:16,938 - INFO - Expected Dimension: 11620.5
+2025-02-16 03:45:16,938 - INFO - Contour Dimension: 12698.5
+2025-02-16 03:45:16,938 - INFO - Tolarance: 3000 Diff: 1078.0
+2025-02-16 03:45:16,941 - INFO - _________CB START_________
+2025-02-16 03:45:16,941 - INFO - defect : False
+2025-02-16 03:45:16,941 - INFO - any_defect_identified : False
+2025-02-16 03:45:16,941 - INFO - cb_on_cam : True
+2025-02-16 03:45:16,941 - INFO - cb_identified : True
+2025-02-16 03:45:16,941 - INFO - _________CB END_________
+2025-02-16 03:45:17,224 - INFO - cp identified 1
+2025-02-16 03:45:17,225 - INFO - cb
+2025-02-16 03:45:17,225 - INFO - Cb Dimention wXh: (23.900000000000002, 25.8)
+2025-02-16 03:45:17,225 - INFO - cp identified 2: False Class Name: cb
+2025-02-16 03:45:17,225 - INFO - cp identified 3
+2025-02-16 03:45:17,228 - INFO - Expected Dimension: 11620.5
+2025-02-16 03:45:17,229 - INFO - Contour Dimension: 13018.0
+2025-02-16 03:45:17,229 - INFO - Tolarance: 3000 Diff: 1397.5
+2025-02-16 03:45:17,231 - INFO - _________CB START_________
+2025-02-16 03:45:17,231 - INFO - defect : False
+2025-02-16 03:45:17,231 - INFO - any_defect_identified : False
+2025-02-16 03:45:17,231 - INFO - cb_on_cam : True
+2025-02-16 03:45:17,231 - INFO - cb_identified : True
+2025-02-16 03:45:17,231 - INFO - _________CB END_________
+2025-02-16 03:45:17,517 - INFO - Cam: 0 current brush ID: 1 Value: 2
+2025-02-16 03:45:17,517 - INFO - brush left
+
+
+
+
+2025-02-16 03:45:27,460 - INFO - Closing All Cameras.
+2025-02-16 03:45:28,245 - INFO - All camera daily operations are closed

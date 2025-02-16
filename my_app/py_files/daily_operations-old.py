@@ -9,7 +9,7 @@ from PIL import Image, ImageTk
 from multiprocessing import Process
 import multiprocessing
 import yolo_functions.analys as yolo_analys
-
+from multiprocessing import Manager, Lock
 is_ouput_required = False
 # is_ouput_required = True
 
@@ -30,14 +30,19 @@ time_delay = json_data["time_delay"] #time delay to take pictures
 arduino_com_port = json_data["arduino_com_port"] #time delay to take pictures
 is_ouput_required = json_data["is_ouput_required"] #arduino connection status.
 
-camera_0 = [0,0,0,0,0,0]
-camera_1 = [0,0,0,0,0,0]
-camera_2 = [0,0,0,0,0,0]
-camera_3 = [0,0,0,0,0,0]
-camera_4 = [0,0,0,0,0,0]
-camera_5 = [0,0,0,0,0,0]
+# camera_0 = [0,0,0,0,0,0]
+# camera_1 = [0,0,0,0,0,0]
+# camera_2 = [0,0,0,0,0,0]
+# camera_3 = [0,0,0,0,0,0]
+# camera_4 = [0,0,0,0,0,0]
+# camera_5 = [0,0,0,0,0,0]
+# camera_map = {0:camera_0,1:camera_1,2:camera_2,3:camera_3,4:camera_4,5:camera_5}
+# update_lock = threading.Lock()
 
-camera_map = {0:camera_0,1:camera_1,2:camera_2,3:camera_3,4:camera_4,5:camera_5}
+# Initialize Manager and Lock for shared state
+manager = Manager()
+camera_map = manager.dict({i: manager.list([0, 0, 0, 0, 0, 0]) for i in range(6)})
+update_lock = Lock()  # Lock for synchronizing updates
 
 last_camera = 5
 
@@ -97,8 +102,21 @@ def load_variable(variable_name, default_value=0):
 
 def append_and_rotate(camera_index, new_value):
     global camera_map
-    camera_map[camera_index].append(new_value)  # Append new value
-    camera_map[camera_index].pop(0)  # Remove the first element to maintain size
+    print("Camera update List before")
+    for i in range(len(camera_map)):
+        print("camera "+str(i),end=": ")
+        for j in camera_map[i]:
+            print(str(j),end=" ")
+        print("")
+    with update_lock:
+        camera_map[camera_index].append(new_value)  # Append new value
+        camera_map[camera_index].pop(0)  # Remove the first element to maintain size
+    print("Camera update List after")
+    for i in range(len(camera_map)):
+        print("camera "+str(i),end=": ")
+        for j in camera_map[i]:
+            print(str(j),end=" ")
+        print("")
 
 # Function to relay final decision to Arduino and update servo
 def relay_servo_command(status):
@@ -117,23 +135,29 @@ def relay_servo_command(status):
 # Function to check the diagonal values
 def check_diagonal():
     # Iterate through each camera index and check the diagonal values
+    print("Camera Detected List")
     for i in range(len(camera_map)):
-        if camera_map[i][i] == 0:  # Check diagonal value
+        print("camera "+str(i),end=": ")
+        for j in camera_map[i]:
+            print(str(j),end=" ")
+        print("")
+        
+    for i in range(len(camera_map)):
+        if camera_map[i][i] == 1:  # Check diagonal value
             return False  # Return False if any diagonal value is 0
     return True  # Return True if no diagonal value is 0
 
-def rejection_machanism(running):
+def rejection_machanism():
     global brush_id
-    while running.value:
-        try:
-            brush_status = check_diagonal()
-            relay_servo_command(brush_status)
-            brush_id = brush_id + 1
-            if brush_status:
-                print("Brush "+str(brush_id)+" is Accepted")
-            else:
-                print("Brush "+str(brush_id)+" is Rejected ")
-        except Exception as e:
+    try:
+        brush_status = check_diagonal()
+        relay_servo_command(brush_status)
+        brush_id = brush_id + 1
+        if brush_status:
+            print("Brush "+str(brush_id)+" is Accepted")
+        else:
+            print("Brush "+str(brush_id)+" is Rejected ")
+    except Exception as e:
             print(f"Error in rejection_machanism: {e}")
 
 def is_last_camera(camera_index):
@@ -143,7 +167,6 @@ def is_last_camera(camera_index):
         return False
     
 def main_program(camera_id, camera_index, running):
-
     cap = cv2.VideoCapture(camera_id, cv2.CAP_DSHOW)
     if not cap.isOpened():
         print(f"Error: Could not open camera id {camera_id} index{camera_index}")
@@ -162,8 +185,9 @@ def main_program(camera_id, camera_index, running):
         if not ret:
             print("Failed to capture image from webcam.")
             break
-
+        # t = time.process_time()
         frame, cb_identified, defect_identified = yolo_analys.check_frame(frame)
+        # print(time.process_time()-t)
         window_name = f"Camera id: {camera_id} index: {camera_index}"+" - Q-quit"
         cv2.imshow(window_name, frame)
         # Check for key inputs
@@ -172,7 +196,7 @@ def main_program(camera_id, camera_index, running):
             print(f"Closing All Cameras.")
             running.value = False
             break
-        
+
         if not cb_on_cam and cb_identified: 
             cb_on_cam = True
 

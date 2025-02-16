@@ -1,9 +1,14 @@
 {
-    "5_threshold_min": 165,
-    "5_threshold_max": 195,
-    "2_threshold_min": 155,
-    "3_sat_max": 225,
-    "3_sat_min": 25,
-    "3_threshold_min": 10,
-    "3_threshold_max": 230
+    "l_h1": 2,
+    "l_s1": 0,
+    "l_v1": 0,
+    "h_h1": 0,
+    "h_s1": 0,
+    "h_v1": 0,
+    "l_h2": 0,
+    "l_s2": 0,
+    "l_v2": 0,
+    "h_h2": 179,
+    "h_s2": 43,
+    "h_v2": 255
 }

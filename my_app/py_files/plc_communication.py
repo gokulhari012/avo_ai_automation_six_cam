@@ -1,10 +1,15 @@
 # from pymodbus.client.sync import ModbusTcpClient as ModbusClient
 from pymodbus.client import ModbusTcpClient as ModbusClient
 import time
+import json
 
 # Configure Modbus client
 # client = ModbusClient(host='192.168.0.10', port=502)  # Replace with your PLC IP and port
 ip_address = ""
+
+with open("configuration.json", "r") as file:
+    json_data = json.load(file)
+stepper_motor_speed = json_data["stepper_motor_speed"]
 
 def connect():
     global client, connection
@@ -21,7 +26,7 @@ def setup(ip_address_var):
     print("Connected to PLC")
     close()
 
-def write(value, address=0): # address 0 = 1 is accept and 0 is reject
+def write(value, address=0):
     connect()
     if connection:
         # Write signal (0 or 1) to Coil (Discrete Output) at address 0
@@ -42,12 +47,28 @@ def write(value, address=0): # address 0 = 1 is accept and 0 is reject
         print("Failed to connect to PLC")
     close()
   
+def start_stepper_motor():
+    connect()
+    if connection:
+        client.write_register(0, stepper_motor_speed) # speed
+        client.write_register(1, 0) # forward reverse
+        client.write_register(2, 1) # speed
+    close()
+
+def stop_stepper_motor():
+    connect()
+    if connection:
+        client.write_register(0, 0) # speed
+        client.write_register(2, 1) # speed
+    close()
+
 def write_regester(value=1000,register_address=0):
     # address 0 = Speed like 1000
     # address 1 = 0 forward and 1 is reverser
     # address 2 = 1 is OK and 0 is not okay
     # address 3 = 1 is PC available and 0 is not available
     # address 4 = 1 is PLC available and 0 is not available
+    # address 6 = brush feed delay
     connect()
     if connection:
         # Write signal (0 or 1) to Coil (Discrete Output) at address 0
@@ -70,7 +91,6 @@ def write_regester(value=1000,register_address=0):
     else:
         print("Failed to connect to PLC")
     close()
-
 
 
 def close():

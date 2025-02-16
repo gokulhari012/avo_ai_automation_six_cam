@@ -4,6 +4,18 @@ import cv2
 import os
 import glob
 
+brush_name_list_path = "json/brush_name_list.txt"
+
+def load_brush():
+    try:
+        with open(brush_name_list_path, "r") as file:
+            brush_names = file.readlines()
+        brush_names = [brush.strip() for brush in brush_names]
+        return brush_names    
+    except FileNotFoundError:
+        pass  # If the file doesn't exist, we do nothing
+
+
 def select_brush_window():
     
     # Create a new window for Select Brush
@@ -20,7 +32,8 @@ def select_brush_window():
     bg_label.place(relwidth=1, relheight=1)
 
     # List all dataset folders and create buttons with custom font and image
-    dataset_folders = [folder for folder in os.listdir('./datasets') if os.path.isdir(os.path.join('./datasets', folder)) and folder.startswith('brushID_')]
+    brush_list = load_brush()
+    brush_list.insert(0,"cb")
     font_path = "assets/Loubag-Bold.ttf"
     font_size = 70
     font = ImageFont.truetype(font_path, font_size)
@@ -30,9 +43,9 @@ def select_brush_window():
     button_width = 200
     button_height = 75
     max_buttons_per_column = (820 - 20) // (button_height + 20)
-    num_columns = (len(dataset_folders) + max_buttons_per_column - 1) // max_buttons_per_column
+    num_columns = (len(brush_list) + max_buttons_per_column - 1) // max_buttons_per_column
 
-    for idx, folder in enumerate(dataset_folders):
+    for idx, folder in enumerate(brush_list):
         # Load the button image using OpenCV
         image = cv2.imread(button_image_path)
         if image is None:

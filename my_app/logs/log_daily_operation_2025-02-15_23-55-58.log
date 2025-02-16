@@ -1,0 +1,10 @@
+2025-02-15 23:55:58,757 - INFO - Servo set to home position.
+2025-02-15 23:56:01,796 - INFO - Decfect identified 1
+2025-02-15 23:56:01,799 - INFO - _________DEFECT START_________
+2025-02-15 23:56:01,799 - INFO - defect : True
+2025-02-15 23:56:01,799 - INFO - any_defect_identified : False
+2025-02-15 23:56:01,799 - INFO - cb_on_cam : False
+2025-02-15 23:56:01,799 - INFO - cb_identified : False
+2025-02-15 23:56:01,799 - INFO - _________DEFECT END_________
+2025-02-15 23:56:05,199 - INFO - Closing All Cameras.
+2025-02-15 23:56:05,866 - INFO - All camera daily operations are closed

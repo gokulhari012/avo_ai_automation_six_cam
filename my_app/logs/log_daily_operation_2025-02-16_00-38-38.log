@@ -1,0 +1,4 @@
+2025-02-16 00:38:40,058 - INFO - Servo set to home position.
+2025-02-16 00:38:52,537 - ERROR - Error: Could not open camera id 3 index4
+2025-02-16 00:39:17,941 - INFO - Closing All Cameras.
+2025-02-16 00:39:18,469 - INFO - All camera daily operations are closed

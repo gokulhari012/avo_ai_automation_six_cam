@@ -1,0 +1,43 @@
+2025-02-15 23:54:29,630 - INFO - Servo set to home position.
+2025-02-15 23:54:39,879 - INFO - cp identified 1
+2025-02-15 23:54:39,880 - INFO - cb
+2025-02-15 23:54:39,880 - INFO - Cb Dimention wXh: (38.5, 21.1)
+2025-02-15 23:54:39,880 - INFO - cp identified 2: False Class Name: cb
+2025-02-15 23:54:39,880 - INFO - cp identified 3
+2025-02-15 23:54:39,932 - INFO - New brush created with ID: 1
+2025-02-15 23:54:39,932 - INFO - _________CB START_________
+2025-02-15 23:54:39,932 - INFO - defect : False
+2025-02-15 23:54:39,932 - INFO - any_defect_identified : True
+2025-02-15 23:54:39,934 - INFO - cb_on_cam : True
+2025-02-15 23:54:39,934 - INFO - cb_identified : True
+2025-02-15 23:54:39,934 - INFO - _________CB END_________
+2025-02-15 23:54:40,194 - INFO - cp identified 1
+2025-02-15 23:54:40,195 - INFO - cb
+2025-02-15 23:54:40,195 - INFO - Cb Dimention wXh: (38.5, 21.0)
+2025-02-15 23:54:40,195 - INFO - cp identified 2: False Class Name: cb
+2025-02-15 23:54:40,195 - INFO - cp identified 3
+2025-02-15 23:54:40,201 - INFO - _________CB START_________
+2025-02-15 23:54:40,201 - INFO - defect : False
+2025-02-15 23:54:40,202 - INFO - any_defect_identified : True
+2025-02-15 23:54:40,202 - INFO - cb_on_cam : True
+2025-02-15 23:54:40,202 - INFO - cb_identified : True
+2025-02-15 23:54:40,202 - INFO - _________CB END_________
+2025-02-15 23:54:40,480 - INFO - cp identified 1
+2025-02-15 23:54:40,481 - INFO - cb
+2025-02-15 23:54:40,481 - INFO - Cb Dimention wXh: (39.400000000000006, 16.6)
+2025-02-15 23:54:40,481 - INFO - cp identified 2: False Class Name: cb
+2025-02-15 23:54:40,481 - INFO - cp identified 3
+2025-02-15 23:54:40,486 - INFO - _________CB START_________
+2025-02-15 23:54:40,487 - INFO - defect : False
+2025-02-15 23:54:40,487 - INFO - any_defect_identified : True
+2025-02-15 23:54:40,487 - INFO - cb_on_cam : True
+2025-02-15 23:54:40,487 - INFO - cb_identified : True
+2025-02-15 23:54:40,487 - INFO - _________CB END_________
+2025-02-15 23:54:40,769 - INFO - Cam: 0 current brush ID: 1 Value: 1
+2025-02-15 23:54:40,769 - INFO - brush left
+
+
+
+
+2025-02-15 23:54:43,535 - INFO - Closing All Cameras.
+2025-02-15 23:55:52,129 - INFO - All camera daily operations are closed

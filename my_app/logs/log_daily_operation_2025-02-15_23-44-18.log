@@ -1,0 +1,65 @@
+2025-02-15 23:44:19,125 - INFO - Servo set to home position.
+2025-02-15 23:44:31,460 - INFO - cp identified 1
+2025-02-15 23:44:31,461 - INFO - cb
+2025-02-15 23:44:31,461 - INFO - Cb Dimention wXh: (46.300000000000004, 24.5)
+2025-02-15 23:44:31,461 - INFO - cp identified 2: False Class Name: cb
+2025-02-15 23:44:31,461 - INFO - cp identified 3
+2025-02-15 23:44:31,467 - INFO - New brush created with ID: 1
+2025-02-15 23:44:31,467 - INFO - _________CB START_________
+2025-02-15 23:44:31,467 - INFO - defect : False
+2025-02-15 23:44:31,467 - INFO - any_defect_identified : True
+2025-02-15 23:44:31,469 - INFO - cb_on_cam : True
+2025-02-15 23:44:31,469 - INFO - cb_identified : True
+2025-02-15 23:44:31,469 - INFO - _________CB END_________
+2025-02-15 23:44:31,749 - INFO - cp identified 1
+2025-02-15 23:44:31,749 - INFO - cb
+2025-02-15 23:44:31,750 - INFO - Cb Dimention wXh: (36.300000000000004, 30.0)
+2025-02-15 23:44:31,750 - INFO - cp identified 2: False Class Name: cb
+2025-02-15 23:44:31,750 - INFO - cp identified 3
+2025-02-15 23:44:31,755 - INFO - _________CB START_________
+2025-02-15 23:44:31,756 - INFO - defect : False
+2025-02-15 23:44:31,756 - INFO - any_defect_identified : True
+2025-02-15 23:44:31,756 - INFO - cb_on_cam : True
+2025-02-15 23:44:31,756 - INFO - cb_identified : True
+2025-02-15 23:44:31,756 - INFO - _________CB END_________
+2025-02-15 23:44:32,039 - INFO - cp identified 1
+2025-02-15 23:44:32,039 - INFO - cb
+2025-02-15 23:44:32,040 - INFO - Cb Dimention wXh: (37.0, 30.200000000000003)
+2025-02-15 23:44:32,040 - INFO - cp identified 2: False Class Name: cb
+2025-02-15 23:44:32,040 - INFO - cp identified 3
+2025-02-15 23:44:32,045 - INFO - _________CB START_________
+2025-02-15 23:44:32,045 - INFO - defect : False
+2025-02-15 23:44:32,045 - INFO - any_defect_identified : True
+2025-02-15 23:44:32,045 - INFO - cb_on_cam : True
+2025-02-15 23:44:32,045 - INFO - cb_identified : True
+2025-02-15 23:44:32,045 - INFO - _________CB END_________
+2025-02-15 23:44:32,330 - INFO - cp identified 1
+2025-02-15 23:44:32,331 - INFO - cb
+2025-02-15 23:44:32,331 - INFO - Cb Dimention wXh: (37.5, 28.400000000000002)
+2025-02-15 23:44:32,331 - INFO - cp identified 2: False Class Name: cb
+2025-02-15 23:44:32,331 - INFO - cp identified 3
+2025-02-15 23:44:32,337 - INFO - _________CB START_________
+2025-02-15 23:44:32,337 - INFO - defect : False
+2025-02-15 23:44:32,337 - INFO - any_defect_identified : True
+2025-02-15 23:44:32,337 - INFO - cb_on_cam : True
+2025-02-15 23:44:32,338 - INFO - cb_identified : True
+2025-02-15 23:44:32,338 - INFO - _________CB END_________
+2025-02-15 23:44:32,620 - INFO - cp identified 1
+2025-02-15 23:44:32,620 - INFO - cb
+2025-02-15 23:44:32,620 - INFO - Cb Dimention wXh: (37.800000000000004, 20.8)
+2025-02-15 23:44:32,621 - INFO - cp identified 2: False Class Name: cb
+2025-02-15 23:44:32,621 - INFO - cp identified 3
+2025-02-15 23:44:32,626 - INFO - _________CB START_________
+2025-02-15 23:44:32,626 - INFO - defect : False
+2025-02-15 23:44:32,626 - INFO - any_defect_identified : True
+2025-02-15 23:44:32,626 - INFO - cb_on_cam : True
+2025-02-15 23:44:32,626 - INFO - cb_identified : True
+2025-02-15 23:44:32,626 - INFO - _________CB END_________
+2025-02-15 23:44:32,916 - INFO - Cam: 0 current brush ID: 1 Value: 1
+2025-02-15 23:44:32,917 - INFO - brush left
+
+
+
+
+2025-02-15 23:44:46,345 - INFO - Closing All Cameras.
+2025-02-15 23:51:50,086 - INFO - All camera daily operations are closed

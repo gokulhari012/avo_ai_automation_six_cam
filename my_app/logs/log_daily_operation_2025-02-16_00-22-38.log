@@ -1,0 +1,48 @@
+2025-02-16 00:22:38,727 - INFO - Servo set to home position.
+2025-02-16 00:22:44,156 - INFO - cp identified 1
+2025-02-16 00:22:44,157 - INFO - cb
+2025-02-16 00:22:44,157 - INFO - Cb Dimention wXh: (16.8, 26.900000000000002)
+2025-02-16 00:22:44,157 - INFO - cp identified 2: False Class Name: cb
+2025-02-16 00:22:44,157 - INFO - cp identified 3
+2025-02-16 00:22:44,161 - INFO - _________CB START_________
+2025-02-16 00:22:44,161 - INFO - defect : False
+2025-02-16 00:22:44,161 - INFO - any_defect_identified : False
+2025-02-16 00:22:44,161 - INFO - cb_on_cam : True
+2025-02-16 00:22:44,162 - INFO - cb_identified : True
+2025-02-16 00:22:44,163 - INFO - _________CB END_________
+2025-02-16 00:22:44,450 - INFO - cp identified 1
+2025-02-16 00:22:44,451 - INFO - cb
+2025-02-16 00:22:44,451 - INFO - Cb Dimention wXh: (21.1, 33.9)
+2025-02-16 00:22:44,451 - INFO - cp identified 2: False Class Name: cb
+2025-02-16 00:22:44,451 - INFO - cp identified 3
+2025-02-16 00:22:44,455 - INFO - _________CB START_________
+2025-02-16 00:22:44,455 - INFO - defect : False
+2025-02-16 00:22:44,455 - INFO - any_defect_identified : False
+2025-02-16 00:22:44,455 - INFO - cb_on_cam : True
+2025-02-16 00:22:44,455 - INFO - cb_identified : True
+2025-02-16 00:22:44,455 - INFO - _________CB END_________
+2025-02-16 00:22:45,724 - ERROR - Error in append_and_rotate - Brush Id not found
+2025-02-16 00:22:45,725 - INFO - brush left
+
+
+
+
+2025-02-16 00:22:49,951 - INFO - cp identified 1
+2025-02-16 00:22:49,951 - INFO - cb
+2025-02-16 00:22:49,951 - INFO - Cb Dimention wXh: (61.2, 45.800000000000004)
+2025-02-16 00:22:49,952 - INFO - cp identified 2: False Class Name: cb
+2025-02-16 00:22:49,952 - INFO - cp identified 3
+2025-02-16 00:22:49,954 - INFO - _________CB START_________
+2025-02-16 00:22:49,954 - INFO - defect : False
+2025-02-16 00:22:49,954 - INFO - any_defect_identified : False
+2025-02-16 00:22:49,954 - INFO - cb_on_cam : True
+2025-02-16 00:22:49,954 - INFO - cb_identified : True
+2025-02-16 00:22:49,954 - INFO - _________CB END_________
+2025-02-16 00:22:50,234 - ERROR - Error in append_and_rotate - Brush Id not found
+2025-02-16 00:22:50,234 - INFO - brush left
+
+
+
+
+2025-02-16 00:23:06,127 - INFO - Closing All Cameras.
+2025-02-16 00:23:06,847 - INFO - All camera daily operations are closed

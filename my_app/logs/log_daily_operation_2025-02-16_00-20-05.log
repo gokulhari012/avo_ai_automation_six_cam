@@ -1,0 +1,274 @@
+2025-02-16 00:20:05,978 - INFO - Servo set to home position.
+2025-02-16 00:20:11,226 - INFO - cp identified 1
+2025-02-16 00:20:11,227 - INFO - cb
+2025-02-16 00:20:11,227 - INFO - Cb Dimention wXh: (51.300000000000004, 44.7)
+2025-02-16 00:20:11,227 - INFO - cp identified 2: False Class Name: cb
+2025-02-16 00:20:11,227 - INFO - cp identified 3
+2025-02-16 00:20:12,161 - INFO - New brush created with ID: 1
+2025-02-16 00:20:12,161 - INFO - Brush reject due to dimension not fit
+2025-02-16 00:20:12,161 - INFO - _________CB START_________
+2025-02-16 00:20:12,163 - INFO - defect : False
+2025-02-16 00:20:12,163 - INFO - any_defect_identified : True
+2025-02-16 00:20:12,163 - INFO - cb_on_cam : True
+2025-02-16 00:20:12,163 - INFO - cb_identified : True
+2025-02-16 00:20:12,163 - INFO - _________CB END_________
+2025-02-16 00:20:12,433 - INFO - cp identified 1
+2025-02-16 00:20:12,433 - INFO - cb
+2025-02-16 00:20:12,433 - INFO - Cb Dimention wXh: (52.400000000000006, 48.0)
+2025-02-16 00:20:12,433 - INFO - cp identified 2: False Class Name: cb
+2025-02-16 00:20:12,433 - INFO - cp identified 3
+2025-02-16 00:20:12,440 - INFO - _________CB START_________
+2025-02-16 00:20:12,440 - INFO - defect : False
+2025-02-16 00:20:12,440 - INFO - any_defect_identified : True
+2025-02-16 00:20:12,440 - INFO - cb_on_cam : True
+2025-02-16 00:20:12,440 - INFO - cb_identified : True
+2025-02-16 00:20:12,440 - INFO - _________CB END_________
+2025-02-16 00:20:12,723 - INFO - Cam: 0 current brush ID: 1 Value: 1
+2025-02-16 00:20:12,723 - INFO - brush left
+
+
+
+
+2025-02-16 00:20:37,595 - INFO - cp identified 1
+2025-02-16 00:20:37,596 - INFO - cb
+2025-02-16 00:20:37,596 - INFO - Cb Dimention wXh: (46.6, 43.800000000000004)
+2025-02-16 00:20:37,596 - INFO - cp identified 2: False Class Name: cb
+2025-02-16 00:20:37,596 - INFO - cp identified 3
+2025-02-16 00:20:37,602 - INFO - New brush created with ID: 2
+2025-02-16 00:20:37,603 - INFO - Brush reject due to dimension not fit
+2025-02-16 00:20:37,603 - INFO - _________CB START_________
+2025-02-16 00:20:37,603 - INFO - defect : False
+2025-02-16 00:20:37,603 - INFO - any_defect_identified : True
+2025-02-16 00:20:37,603 - INFO - cb_on_cam : True
+2025-02-16 00:20:37,603 - INFO - cb_identified : True
+2025-02-16 00:20:37,603 - INFO - _________CB END_________
+2025-02-16 00:20:37,884 - INFO - cp identified 1
+2025-02-16 00:20:37,884 - INFO - cb
+2025-02-16 00:20:37,884 - INFO - Cb Dimention wXh: (46.5, 47.5)
+2025-02-16 00:20:37,885 - INFO - cp identified 2: False Class Name: cb
+2025-02-16 00:20:37,885 - INFO - cp identified 3
+2025-02-16 00:20:37,891 - INFO - _________CB START_________
+2025-02-16 00:20:37,891 - INFO - defect : False
+2025-02-16 00:20:37,891 - INFO - any_defect_identified : True
+2025-02-16 00:20:37,891 - INFO - cb_on_cam : True
+2025-02-16 00:20:37,891 - INFO - cb_identified : True
+2025-02-16 00:20:37,891 - INFO - _________CB END_________
+2025-02-16 00:20:38,168 - INFO - cp identified 1
+2025-02-16 00:20:38,169 - INFO - cb
+2025-02-16 00:20:38,169 - INFO - Cb Dimention wXh: (46.7, 48.0)
+2025-02-16 00:20:38,169 - INFO - cp identified 2: False Class Name: cb
+2025-02-16 00:20:38,169 - INFO - cp identified 3
+2025-02-16 00:20:38,176 - INFO - _________CB START_________
+2025-02-16 00:20:38,176 - INFO - defect : False
+2025-02-16 00:20:38,176 - INFO - any_defect_identified : True
+2025-02-16 00:20:38,176 - INFO - cb_on_cam : True
+2025-02-16 00:20:38,176 - INFO - cb_identified : True
+2025-02-16 00:20:38,176 - INFO - _________CB END_________
+2025-02-16 00:20:38,457 - INFO - cp identified 1
+2025-02-16 00:20:38,457 - INFO - cb
+2025-02-16 00:20:38,457 - INFO - Cb Dimention wXh: (45.5, 48.0)
+2025-02-16 00:20:38,457 - INFO - cp identified 2: False Class Name: cb
+2025-02-16 00:20:38,457 - INFO - cp identified 3
+2025-02-16 00:20:38,464 - INFO - _________CB START_________
+2025-02-16 00:20:38,464 - INFO - defect : False
+2025-02-16 00:20:38,464 - INFO - any_defect_identified : True
+2025-02-16 00:20:38,464 - INFO - cb_on_cam : True
+2025-02-16 00:20:38,464 - INFO - cb_identified : True
+2025-02-16 00:20:38,465 - INFO - _________CB END_________
+2025-02-16 00:20:38,742 - INFO - cp identified 1
+2025-02-16 00:20:38,743 - INFO - cb
+2025-02-16 00:20:38,743 - INFO - Cb Dimention wXh: (48.0, 48.0)
+2025-02-16 00:20:38,743 - INFO - cp identified 2: False Class Name: cb
+2025-02-16 00:20:38,743 - INFO - cp identified 3
+2025-02-16 00:20:38,749 - INFO - _________CB START_________
+2025-02-16 00:20:38,749 - INFO - defect : False
+2025-02-16 00:20:38,749 - INFO - any_defect_identified : True
+2025-02-16 00:20:38,749 - INFO - cb_on_cam : True
+2025-02-16 00:20:38,749 - INFO - cb_identified : True
+2025-02-16 00:20:38,749 - INFO - _________CB END_________
+2025-02-16 00:20:39,032 - INFO - Cam: 0 current brush ID: 2 Value: 1
+2025-02-16 00:20:39,032 - INFO - brush left
+
+
+
+
+2025-02-16 00:20:42,164 - INFO - cp identified 1
+2025-02-16 00:20:42,165 - INFO - cb
+2025-02-16 00:20:42,165 - INFO - Cb Dimention wXh: (43.400000000000006, 40.2)
+2025-02-16 00:20:42,165 - INFO - cp identified 2: False Class Name: cb
+2025-02-16 00:20:42,165 - INFO - cp identified 3
+2025-02-16 00:20:42,171 - INFO - New brush created with ID: 3
+2025-02-16 00:20:42,172 - INFO - Brush reject due to dimension not fit
+2025-02-16 00:20:42,172 - INFO - _________CB START_________
+2025-02-16 00:20:42,172 - INFO - defect : False
+2025-02-16 00:20:42,172 - INFO - any_defect_identified : True
+2025-02-16 00:20:42,172 - INFO - cb_on_cam : True
+2025-02-16 00:20:42,172 - INFO - cb_identified : True
+2025-02-16 00:20:42,172 - INFO - _________CB END_________
+2025-02-16 00:20:42,452 - INFO - cp identified 1
+2025-02-16 00:20:42,453 - INFO - cb
+2025-02-16 00:20:42,453 - INFO - Cb Dimention wXh: (41.7, 43.6)
+2025-02-16 00:20:42,453 - INFO - cp identified 2: False Class Name: cb
+2025-02-16 00:20:42,453 - INFO - cp identified 3
+2025-02-16 00:20:42,459 - INFO - _________CB START_________
+2025-02-16 00:20:42,459 - INFO - defect : False
+2025-02-16 00:20:42,459 - INFO - any_defect_identified : True
+2025-02-16 00:20:42,459 - INFO - cb_on_cam : True
+2025-02-16 00:20:42,459 - INFO - cb_identified : True
+2025-02-16 00:20:42,459 - INFO - _________CB END_________
+2025-02-16 00:20:42,739 - INFO - cp identified 1
+2025-02-16 00:20:42,739 - INFO - cb
+2025-02-16 00:20:42,739 - INFO - Cb Dimention wXh: (44.1, 47.7)
+2025-02-16 00:20:42,739 - INFO - cp identified 2: False Class Name: cb
+2025-02-16 00:20:42,739 - INFO - cp identified 3
+2025-02-16 00:20:42,746 - INFO - _________CB START_________
+2025-02-16 00:20:42,746 - INFO - defect : False
+2025-02-16 00:20:42,746 - INFO - any_defect_identified : True
+2025-02-16 00:20:42,746 - INFO - cb_on_cam : True
+2025-02-16 00:20:42,747 - INFO - cb_identified : True
+2025-02-16 00:20:42,747 - INFO - _________CB END_________
+2025-02-16 00:20:43,023 - INFO - cp identified 1
+2025-02-16 00:20:43,024 - INFO - cb
+2025-02-16 00:20:43,024 - INFO - Cb Dimention wXh: (43.5, 48.0)
+2025-02-16 00:20:43,024 - INFO - cp identified 2: False Class Name: cb
+2025-02-16 00:20:43,024 - INFO - cp identified 3
+2025-02-16 00:20:43,030 - INFO - _________CB START_________
+2025-02-16 00:20:43,030 - INFO - defect : False
+2025-02-16 00:20:43,030 - INFO - any_defect_identified : True
+2025-02-16 00:20:43,030 - INFO - cb_on_cam : True
+2025-02-16 00:20:43,030 - INFO - cb_identified : True
+2025-02-16 00:20:43,030 - INFO - _________CB END_________
+2025-02-16 00:20:43,311 - INFO - cp identified 1
+2025-02-16 00:20:43,311 - INFO - cb
+2025-02-16 00:20:43,311 - INFO - Cb Dimention wXh: (42.900000000000006, 48.0)
+2025-02-16 00:20:43,312 - INFO - cp identified 2: False Class Name: cb
+2025-02-16 00:20:43,312 - INFO - cp identified 3
+2025-02-16 00:20:43,318 - INFO - _________CB START_________
+2025-02-16 00:20:43,318 - INFO - defect : False
+2025-02-16 00:20:43,318 - INFO - any_defect_identified : True
+2025-02-16 00:20:43,318 - INFO - cb_on_cam : True
+2025-02-16 00:20:43,318 - INFO - cb_identified : True
+2025-02-16 00:20:43,318 - INFO - _________CB END_________
+2025-02-16 00:20:43,594 - INFO - cp identified 1
+2025-02-16 00:20:43,594 - INFO - cb
+2025-02-16 00:20:43,595 - INFO - Cb Dimention wXh: (42.900000000000006, 48.0)
+2025-02-16 00:20:43,595 - INFO - cp identified 2: False Class Name: cb
+2025-02-16 00:20:43,595 - INFO - cp identified 3
+2025-02-16 00:20:43,601 - INFO - _________CB START_________
+2025-02-16 00:20:43,601 - INFO - defect : False
+2025-02-16 00:20:43,601 - INFO - any_defect_identified : True
+2025-02-16 00:20:43,601 - INFO - cb_on_cam : True
+2025-02-16 00:20:43,601 - INFO - cb_identified : True
+2025-02-16 00:20:43,601 - INFO - _________CB END_________
+2025-02-16 00:20:43,881 - INFO - cp identified 1
+2025-02-16 00:20:43,881 - INFO - cb
+2025-02-16 00:20:43,882 - INFO - Cb Dimention wXh: (42.400000000000006, 48.0)
+2025-02-16 00:20:43,882 - INFO - cp identified 2: False Class Name: cb
+2025-02-16 00:20:43,882 - INFO - cp identified 3
+2025-02-16 00:20:43,888 - INFO - _________CB START_________
+2025-02-16 00:20:43,888 - INFO - defect : False
+2025-02-16 00:20:43,888 - INFO - any_defect_identified : True
+2025-02-16 00:20:43,888 - INFO - cb_on_cam : True
+2025-02-16 00:20:43,888 - INFO - cb_identified : True
+2025-02-16 00:20:43,888 - INFO - _________CB END_________
+2025-02-16 00:20:44,168 - INFO - cp identified 1
+2025-02-16 00:20:44,168 - INFO - cb
+2025-02-16 00:20:44,168 - INFO - Cb Dimention wXh: (41.400000000000006, 48.0)
+2025-02-16 00:20:44,168 - INFO - cp identified 2: False Class Name: cb
+2025-02-16 00:20:44,168 - INFO - cp identified 3
+2025-02-16 00:20:44,175 - INFO - _________CB START_________
+2025-02-16 00:20:44,175 - INFO - defect : False
+2025-02-16 00:20:44,176 - INFO - any_defect_identified : True
+2025-02-16 00:20:44,176 - INFO - cb_on_cam : True
+2025-02-16 00:20:44,176 - INFO - cb_identified : True
+2025-02-16 00:20:44,176 - INFO - _________CB END_________
+2025-02-16 00:20:44,456 - INFO - cp identified 1
+2025-02-16 00:20:44,456 - INFO - cb
+2025-02-16 00:20:44,457 - INFO - Cb Dimention wXh: (38.7, 48.0)
+2025-02-16 00:20:44,457 - INFO - cp identified 2: False Class Name: cb
+2025-02-16 00:20:44,457 - INFO - cp identified 3
+2025-02-16 00:20:44,463 - INFO - _________CB START_________
+2025-02-16 00:20:44,463 - INFO - defect : False
+2025-02-16 00:20:44,463 - INFO - any_defect_identified : True
+2025-02-16 00:20:44,463 - INFO - cb_on_cam : True
+2025-02-16 00:20:44,463 - INFO - cb_identified : True
+2025-02-16 00:20:44,463 - INFO - _________CB END_________
+2025-02-16 00:20:44,743 - INFO - cp identified 1
+2025-02-16 00:20:44,743 - INFO - cb
+2025-02-16 00:20:44,743 - INFO - Cb Dimention wXh: (37.2, 47.400000000000006)
+2025-02-16 00:20:44,744 - INFO - cp identified 2: False Class Name: cb
+2025-02-16 00:20:44,744 - INFO - cp identified 3
+2025-02-16 00:20:44,750 - INFO - _________CB START_________
+2025-02-16 00:20:44,750 - INFO - defect : False
+2025-02-16 00:20:44,750 - INFO - any_defect_identified : True
+2025-02-16 00:20:44,750 - INFO - cb_on_cam : True
+2025-02-16 00:20:44,750 - INFO - cb_identified : True
+2025-02-16 00:20:44,750 - INFO - _________CB END_________
+2025-02-16 00:20:45,031 - INFO - Cam: 0 current brush ID: 3 Value: 1
+2025-02-16 00:20:45,031 - INFO - brush left
+
+
+
+
+2025-02-16 00:20:48,174 - INFO - cp identified 1
+2025-02-16 00:20:48,174 - INFO - cb
+2025-02-16 00:20:48,174 - INFO - Cb Dimention wXh: (45.300000000000004, 42.2)
+2025-02-16 00:20:48,174 - INFO - cp identified 2: False Class Name: cb
+2025-02-16 00:20:48,174 - INFO - cp identified 3
+2025-02-16 00:20:48,180 - INFO - New brush created with ID: 4
+2025-02-16 00:20:48,180 - INFO - Brush reject due to dimension not fit
+2025-02-16 00:20:48,181 - INFO - _________CB START_________
+2025-02-16 00:20:48,181 - INFO - defect : False
+2025-02-16 00:20:48,181 - INFO - any_defect_identified : True
+2025-02-16 00:20:48,181 - INFO - cb_on_cam : True
+2025-02-16 00:20:48,181 - INFO - cb_identified : True
+2025-02-16 00:20:48,181 - INFO - _________CB END_________
+2025-02-16 00:20:48,457 - INFO - cp identified 1
+2025-02-16 00:20:48,457 - INFO - cb
+2025-02-16 00:20:48,458 - INFO - Cb Dimention wXh: (50.5, 44.2)
+2025-02-16 00:20:48,458 - INFO - cp identified 2: False Class Name: cb
+2025-02-16 00:20:48,458 - INFO - cp identified 3
+2025-02-16 00:20:48,464 - INFO - _________CB START_________
+2025-02-16 00:20:48,464 - INFO - defect : False
+2025-02-16 00:20:48,464 - INFO - any_defect_identified : True
+2025-02-16 00:20:48,464 - INFO - cb_on_cam : True
+2025-02-16 00:20:48,464 - INFO - cb_identified : True
+2025-02-16 00:20:48,464 - INFO - _________CB END_________
+2025-02-16 00:20:48,743 - INFO - cp identified 1
+2025-02-16 00:20:48,744 - INFO - cb
+2025-02-16 00:20:48,744 - INFO - Cb Dimention wXh: (46.1, 48.0)
+2025-02-16 00:20:48,744 - INFO - cp identified 2: False Class Name: cb
+2025-02-16 00:20:48,744 - INFO - cp identified 3
+2025-02-16 00:20:48,750 - INFO - _________CB START_________
+2025-02-16 00:20:48,750 - INFO - defect : False
+2025-02-16 00:20:48,750 - INFO - any_defect_identified : True
+2025-02-16 00:20:48,750 - INFO - cb_on_cam : True
+2025-02-16 00:20:48,750 - INFO - cb_identified : True
+2025-02-16 00:20:48,751 - INFO - _________CB END_________
+2025-02-16 00:20:49,031 - INFO - Cam: 0 current brush ID: 4 Value: 1
+2025-02-16 00:20:49,031 - INFO - brush left
+
+
+
+
+2025-02-16 00:22:00,806 - INFO - cp identified 1
+2025-02-16 00:22:00,806 - INFO - cb
+2025-02-16 00:22:00,806 - INFO - Cb Dimention wXh: (45.800000000000004, 38.400000000000006)
+2025-02-16 00:22:00,807 - INFO - cp identified 2: False Class Name: cb
+2025-02-16 00:22:00,807 - INFO - cp identified 3
+2025-02-16 00:22:00,813 - INFO - New brush created with ID: 5
+2025-02-16 00:22:00,814 - INFO - Brush reject due to dimension not fit
+2025-02-16 00:22:00,814 - INFO - _________CB START_________
+2025-02-16 00:22:00,814 - INFO - defect : False
+2025-02-16 00:22:00,814 - INFO - any_defect_identified : True
+2025-02-16 00:22:00,814 - INFO - cb_on_cam : True
+2025-02-16 00:22:00,814 - INFO - cb_identified : True
+2025-02-16 00:22:00,814 - INFO - _________CB END_________
+2025-02-16 00:22:01,100 - INFO - Cam: 0 current brush ID: 5 Value: 1
+2025-02-16 00:22:01,100 - INFO - brush left
+
+
+
+
+2025-02-16 00:22:32,419 - INFO - Closing All Cameras.
+2025-02-16 00:22:33,295 - INFO - All camera daily operations are closed
