@@ -3,5 +3,10 @@
     "rejection_time_delay": 500,
     "plc_ip_address": "169.254.225.8", 
     "is_ouput_required": true,
-    "brush_left_time_delay": 0.5
+    "brush_left_time_delay": 2000,
+    "brush_dimension_tolarance" : 2,
+    "contours_area_threshold" : 8000,
+    "contours_area_tolarance" : 2000,
+    "stepper_motor_speed" : 1000
 }
+
