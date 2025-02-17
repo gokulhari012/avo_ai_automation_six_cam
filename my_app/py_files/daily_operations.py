@@ -188,6 +188,7 @@ def check_brush(brush_id):
 def rejection_machanism(brush_id):
     global brush_map
     try:
+        brush_status = False
         if brush_id in brush_map:
             brush_status = check_brush(brush_id)
             t = threading.Thread(target=relay_servo_command, args=(brush_status,))
@@ -204,7 +205,7 @@ def rejection_machanism(brush_id):
         else:
             print("Rejection mechanish brush id not found: "+str(brush_id))
             log_info("Rejection mechanish brush id not found: "+str(brush_id))
-    
+        return brush_status
     except Exception as e:
             print(f"Error in rejection_machanism: {e}")
             log_error(f"Error in rejection_machanism: {e}")
@@ -255,7 +256,7 @@ def check_dimensions(brush_id_name, cb_dimentions):
         log_info("Detected dimensions are out of tolerance.")
         return False
 
-def put_text(text, frame, color):
+def put_text(text, frame, color, brush_status):
     height, width, _ = frame.shape
     # Get the size of the text
     (text_width, text_height), baseline = cv2.getTextSize(text, font, font_scale, font_thickness)
@@ -269,6 +270,13 @@ def put_text(text, frame, color):
     cv2.putText(frame, text, (x, y), font, font_scale, color, font_thickness)
     # Optional: If you want to highlight the text with a rectangle
     cv2.rectangle(frame, (x-10, y+10), (x+text_width+10, y-text_height-10), color, 2)
+    if not brush_status==None:
+        brush_msg = "Total: Accepted" if brush_status else "Total: Rejected"
+        color = (0,255,0) if brush_status else (0,0,255)
+        y = y+100
+        cv2.putText(frame, brush_msg , (x, y), font, font_scale, color, font_thickness)
+        # Optional: If you want to highlight the text with a rectangle
+        cv2.rectangle(frame, (x-10, y+10), (x+text_width+10, y-text_height-10), color, 2)
 
 def main_program(camera_id, camera_index):
     global running
@@ -365,8 +373,9 @@ def main_program(camera_id, camera_index):
                     append_and_rotate(camera_index, 2) # good
                     accept_msg = True
                 any_defect_identified = False
+                brush_status = None
                 if is_last_camera(camera_index):
-                    rejection_machanism(last_updated_brush_id[last_camera])
+                    brush_status = rejection_machanism(last_updated_brush_id[last_camera])
                 make_delay = True
                 previous_time = time.time() * 1000
                 log_info("brush left\n\n\n\n")
@@ -374,14 +383,14 @@ def main_program(camera_id, camera_index):
 
         if defect_msg:
             text = f"No: {last_updated_brush_id[camera_index]} is Rejected"
-            put_text(text, frame, (0, 0, 255))
+            put_text(text, frame, (0, 0, 255), brush_status)
 
             # cv2.putText(frame, f"Count ID: "+str(last_updated_brush_id[camera_index])+" Rejected", (width//2-100, height//2-100),
                             # cv2.FONT_HERSHEY_TRIPLEX, 1, (0, 0, 255), 1)
         elif accept_msg:
             # Define text
             text = f"No: {last_updated_brush_id[camera_index]} is Accepted"
-            put_text(text, frame, (0, 255, 0))
+            put_text(text, frame, (0, 255, 0), brush_status)
 
             # cv2.putText(frame, f"Count ID: "+str(last_updated_brush_id[camera_index])+" Accepted", (width//2-100, height//2-100),
                             # cv2.FONT_HERSHEY_TRIPLEX, 1, (0, 255, 0), 1)

@@ -23,9 +23,10 @@ with open("json/selected_brush.txt", "r") as file:
 
 logging.getLogger("ultralytics").setLevel(logging.ERROR) 
 confidence = 0.50
-defect_confidence = 0.4
+defect_confidence = 0.7
 square_value = 100
-square_value_detect = 100
+square_value_detect = 150
+square_skip = True
 
 # Load the YOLOv8 model
 common_knowledge_path = "common_knowledge/weights/best.pt"
@@ -90,7 +91,8 @@ def check_frame(frame, brush_count_id, brush_id):
         # Modify condition as needed
         obj_center_x, obj_center_y = x1+((x2-x1)//2), y1+((y2-y1)//2)
         # Check if object is near center
-        if abs(center_x-square_value_detect) <= obj_center_x <= abs(center_x+square_value_detect) and abs(center_y-square_value_detect) <= obj_center_y <= abs(center_y+square_value_detect):
+
+        if square_skip or (abs(center_x-square_value_detect) <= obj_center_x <= abs(center_x+square_value_detect) and abs(center_y-square_value_detect) <= obj_center_y <= abs(center_y+square_value_detect)):
             if class_name == "brushID_0" or class_name == 'defect': # brushID_0 is defect
                 if conf > defect_confidence:
                     color = colors["defect"]

@@ -50,6 +50,8 @@ def write(value, address=0):
 def start_stepper_motor():
     connect()
     if connection:
+        client.write_register(3, 1)
+        client.write_register(4, 1)
         client.write_register(0, stepper_motor_speed) # speed
         client.write_register(1, 0) # forward reverse
         client.write_register(2, 1) # speed
